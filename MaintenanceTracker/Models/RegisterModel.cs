@@ -6,12 +6,12 @@ using System.Web;
 
 namespace MaintenanceTracker.Models
 {
-    public class RegisterModel
+    public class RegisterModel : ErrorModel
     {
         [Required]
         [StringLength (50)]
-        [Display(Name = "User name")]
-        public string UserName {get; set;}
+        [Display(Name = "Username")]
+        public string Username {get; set;}
         [Required]
         [Display (Name = "Password")]
         [DataType (DataType.Password)]
