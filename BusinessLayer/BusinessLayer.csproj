@@ -68,6 +68,10 @@
     <Compile Include="User.cs">
       <DependentUpon>MaintenanceTrackerEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Vehicle.cs">
+      <DependentUpon>MaintenanceTrackerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VehicleManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="MaintenanceTrackerEntities.edmx">

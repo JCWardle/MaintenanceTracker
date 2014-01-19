@@ -1,10 +1,60 @@
-﻿
+﻿@model MaintenanceTracker.Models.HomeModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Maintenance Tracker";
 }
 
-<h2>Index</h2>
+<h2>Maintenance Tracker</h2>
 
 <p>
-    OMG HOME PAGE
+    Use this page to manage your vehicles, add recent maintence or export your vehicles detais.
 </p>
+
+@if(Model.Vehicles.Any())
+{ 
+    <h3>Manage your vehicles</h3>
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Registration</th>
+    </tr>
+    <td>
+        @foreach(var v in Model.Vehicles)
+        {
+            @Html.DisplayFor(veh => v)
+        }
+    </td>
+}
+
+<h3>Add a new vehicle</h3>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>New Vehicle</legend>
+        @{var newVehicle = new MaintenanceTracker.Models.VehicleModel();}
+        <ul>
+            <li>
+                @Html.LabelFor(m => m.NewVehicle.Make)
+                @Html.TextBoxFor(m => m.NewVehicle.Make)
+                @Html.ValidationMessageFor(m => m.NewVehicle.Make)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.NewVehicle.Model)
+                @Html.TextBoxFor(m => m.NewVehicle.Model)
+                @Html.ValidationMessageFor(m => m.NewVehicle.Model)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.NewVehicle.Year)
+                @Html.TextBoxFor(m => m.NewVehicle.Year)
+                @Html.ValidationMessageFor(m => m.NewVehicle.Year)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.NewVehicle.Registration)
+                @Html.TextBoxFor(m => m.NewVehicle.Registration)
+                @Html.ValidationMessageFor(m => m.NewVehicle.Registration)
+            </li>
+        </ul>
+        <input type="submit" value="Create new vehicle"/>
+    </fieldset>
+}

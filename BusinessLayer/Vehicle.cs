@@ -12,19 +12,15 @@ namespace BusinessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Vehicle
     {
-        public User()
-        {
-            this.Vehicles = new HashSet<Vehicle>();
-        }
-    
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string Salt { get; set; }
+        public int VehicleId { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public System.DateTime Year { get; set; }
+        public string Registration { get; set; }
         public int UserId { get; set; }
     
-        public virtual ICollection<Vehicle> Vehicles { get; set; }
+        public virtual User User { get; set; }
     }
 }

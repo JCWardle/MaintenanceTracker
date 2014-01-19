@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="99da3ab7aaa2488fa6c638ed60dd63a1" Name="Diagram1">
         <EntityTypeShape EntityType="MaintenanceTrackerModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceTrackerModel.Vehicle" Width="1.5" PointX="3.125" PointY="5.125" />
+        <AssociationConnector Association="MaintenanceTrackerModel.FK__Vehicle__UserId__36B12243" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -2,6 +2,7 @@
 using MaintenanceTracker.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -55,6 +56,27 @@ namespace MaintenanceTracker.Controllers
                     }
             }
             return View(model);
+        }
+
+        public ActionResult PasswordReminder()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PasswordReminder([Required]string email)
+        {
+            if(!String.IsNullOrWhiteSpace(email))
+            {
+                using(var accountManager = new AccountManager())
+                {
+                    if(accountManager.SendReminder(email))
+                        return RedirectToAction("Login", "Account");
+                    else
+                        return View();
+                }
+            }
+            return View();
         }
 	}
 }

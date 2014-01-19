@@ -20,7 +20,7 @@ namespace BusinessLayer
         public void CreateUser(string username, string password, string email)
         {
             //TODO: encrypt salt
-            var salt = GetNewSalt();
+            var salt = GenerateRandomString(SALT_SIZE);
 
             if (_context.Users.Any(u => u.Username == username))
                 throw new InvalidOperationException("That username is already taken");
@@ -51,11 +51,11 @@ namespace BusinessLayer
             }
         }
 
-        public string GetNewSalt(){
+        public string GenerateRandomString(int size){
             var rand = new Random();
             var result = new StringBuilder(); 
 
-            for(int i = 0; i < SALT_SIZE; i++)
+            for(int i = 0; i < size; i++)
                 result.Append(Convert.ToInt32(Math.Floor(26 * rand.NextDouble() + 65)));
 
             return result.ToString();
@@ -66,6 +66,22 @@ namespace BusinessLayer
             var user = _context.Users.First(u => u.Username == username);
 
             return GetHash(password) == user.Password;
+        }
+
+        public bool SendReminder(string email)
+        {
+            if (_context.Users.Any(u => u.Email == email))
+            {
+                EmailNewPassword(email);
+                return true;
+            }
+            return false;
+        }
+
+        private void EmailNewPassword(string email)
+        {
+            //TODO: implement
+            throw new NotImplementedException();
         }
 
         public void Dispose()
