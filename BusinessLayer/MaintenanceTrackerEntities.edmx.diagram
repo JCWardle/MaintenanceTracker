@@ -5,9 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="99da3ab7aaa2488fa6c638ed60dd63a1" Name="Diagram1">
-        <EntityTypeShape EntityType="MaintenanceTrackerModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MaintenanceTrackerModel.Vehicle" Width="1.5" PointX="3.125" PointY="5.125" />
+        <EntityTypeShape EntityType="MaintenanceTrackerModel.User" PointX="0.75" PointY="0.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaintenanceTrackerModel.Vehicle" PointX="3" PointY="3.125" Width="1.5" />
         <AssociationConnector Association="MaintenanceTrackerModel.FK__Vehicle__UserId__36B12243" />
+        <EntityTypeShape EntityType="MaintenanceTrackerModel.Labour" PointX="6.875" PointY="1.125" Width="1.5" />
+        <EntityTypeShape EntityType="MaintenanceTrackerModel.Part" Width="1.5" PointX="7.875" PointY="5.875" />
+        <EntityTypeShape EntityType="MaintenanceTrackerModel.Task" PointX="8.125" PointY="3.75" Width="1.5" />
+        <EntityTypeShape EntityType="MaintenanceTrackerModel.Job" Width="1.5" PointX="5.375" PointY="3.875" />
+        <AssociationConnector Association="MaintenanceTrackerModel.FK__Job__VehicleId__1A14E395" />
+        <AssociationConnector Association="MaintenanceTrackerModel.FK__Labour__Maintena__1B0907CE" />
+        <AssociationConnector Association="MaintenanceTrackerModel.FK__Part__Maintenanc__1BFD2C07" />
+        <AssociationConnector Association="MaintenanceTrackerModel.FK__Task__Maintenanc__1CF15040" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

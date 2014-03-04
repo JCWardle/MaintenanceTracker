@@ -28,6 +28,12 @@ namespace MaintenanceTracker.Controllers
                     try
                     {
                         accountManager.CreateUser(model.Username, model.Password, model.Email);
+                        return Login(
+                            new LoginModel
+                            {
+                                Username = model.Username,
+                                Password = model.Password
+                            });
                     }
                     catch(InvalidOperationException e)
                     {

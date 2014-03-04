@@ -6,24 +6,24 @@
 <h2>Maintenance Tracker</h2>
 
 <p>
-    Use this page to manage your vehicles, add recent maintence or export your vehicles detais.
+    Use this page to manage your vehicles, add recent maintence or export your vehicles details.
 </p>
 
-@if(Model.Vehicles.Any())
-{ 
-    <h3>Manage your vehicles</h3>
-    <tr>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Year</th>
-        <th>Registration</th>
-    </tr>
-    <td>
+@if (Model.Vehicles.Any())
+{
+    <table>
+        <h3>Manage your vehicles</h3>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Registration</th>
+        </tr>
         @foreach(var v in Model.Vehicles)
         {
-            @Html.DisplayFor(veh => v)
+            @Html.DisplayFor(veh => v);
         }
-    </td>
+    </table>
 }
 
 <h3>Add a new vehicle</h3>

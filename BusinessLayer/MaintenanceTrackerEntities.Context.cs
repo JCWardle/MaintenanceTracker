@@ -27,5 +27,9 @@ namespace BusinessLayer
     
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
+        public virtual DbSet<Labour> Labours { get; set; }
+        public virtual DbSet<Part> Parts { get; set; }
+        public virtual DbSet<Task> Tasks { get; set; }
+        public virtual DbSet<Job> Jobs { get; set; }
     }
 }

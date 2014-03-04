@@ -5,6 +5,42 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MaintenanceTrackerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Km" Type="nvarchar" MaxLength="50" />
+          <Property Name="VehicleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Labour">
+          <Key>
+            <PropertyRef Name="LabourId" />
+          </Key>
+          <Property Name="LabourId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Time" Type="nvarchar" MaxLength="10" />
+          <Property Name="Cost" Type="money" />
+          <Property Name="MaintenanceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="PartId" />
+          </Key>
+          <Property Name="PartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaintenanceId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Cost" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaintenanceId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
@@ -26,7 +62,55 @@
           <Property Name="Registration" Type="nvarchar" MaxLength="100" />
           <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Vehicle__UserId__36B12243">
+        <Association Name="FK__Job__VehicleId__1A14E395">
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Labour__Maintena__1B0907CE">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="Labour" Type="Self.Labour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+            </Principal>
+            <Dependent Role="Labour">
+              <PropertyRef Name="MaintenanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Part__Maintenanc__1BFD2C07">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="Part" Type="Self.Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="MaintenanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__Maintenanc__1CF15040">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="MaintenanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicle__UserId__1DE57479">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
           <ReferentialConstraint>
@@ -39,9 +123,29 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MaintenanceTrackerModelStoreContainer">
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Labour" EntityType="Self.Labour" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Part" EntityType="Self.Part" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Vehicle__UserId__36B12243" Association="Self.FK__Vehicle__UserId__36B12243">
+          <AssociationSet Name="FK__Job__VehicleId__1A14E395" Association="Self.FK__Job__VehicleId__1A14E395">
+            <End Role="Vehicle" EntitySet="Vehicle" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Labour__Maintena__1B0907CE" Association="Self.FK__Labour__Maintena__1B0907CE">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Labour" EntitySet="Labour" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__Maintenanc__1BFD2C07" Association="Self.FK__Part__Maintenanc__1BFD2C07">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__Maintenanc__1CF15040" Association="Self.FK__Task__Maintenanc__1CF15040">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicle__UserId__1DE57479" Association="Self.FK__Vehicle__UserId__1DE57479">
             <End Role="User" EntitySet="User" />
             <End Role="Vehicle" EntitySet="Vehicle" />
           </AssociationSet>
@@ -54,42 +158,154 @@
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Salt" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Password" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Email" MaxLength="1000" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Salt" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <NavigationProperty Name="Vehicles" Relationship="MaintenanceTrackerModel.FK__Vehicle__UserId__36B12243" FromRole="User" ToRole="Vehicle" />
         </EntityType>
         <EntityContainer Name="MaintenanceTrackerEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Vehicles" EntityType="MaintenanceTrackerModel.Vehicle" />
           <AssociationSet Name="FK__Vehicle__UserId__36B12243" Association="MaintenanceTrackerModel.FK__Vehicle__UserId__36B12243">
-            <End Role="User" EntitySet="Users" />
+            <End EntitySet="Users" Role="User" />
+            <End EntitySet="Vehicles" Role="Vehicle" />
+          </AssociationSet>
+          <EntitySet Name="Labours" EntityType="MaintenanceTrackerModel.Labour" />
+          <EntitySet Name="Parts" EntityType="MaintenanceTrackerModel.Part" />
+          <EntitySet Name="Tasks" EntityType="MaintenanceTrackerModel.Task" />
+          <EntitySet Name="Jobs" EntityType="MaintenanceTrackerModel.Job" />
+          <AssociationSet Name="FK__Job__VehicleId__1A14E395" Association="MaintenanceTrackerModel.FK__Job__VehicleId__1A14E395">
             <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Labour__Maintena__1B0907CE" Association="MaintenanceTrackerModel.FK__Labour__Maintena__1B0907CE">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Labour" EntitySet="Labours" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__Maintenanc__1BFD2C07" Association="MaintenanceTrackerModel.FK__Part__Maintenanc__1BFD2C07">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Part" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__Maintenanc__1CF15040" Association="MaintenanceTrackerModel.FK__Task__Maintenanc__1CF15040">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Task" EntitySet="Tasks" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Vehicle">
           <Key>
             <PropertyRef Name="VehicleId" />
           </Key>
-          <Property Name="VehicleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Make" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Year" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Registration" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="VehicleId" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Make" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Model" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Year" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="Registration" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="UserId" Nullable="false" Type="Int32" />
           <NavigationProperty Name="User" Relationship="MaintenanceTrackerModel.FK__Vehicle__UserId__36B12243" FromRole="Vehicle" ToRole="User" />
+          <NavigationProperty Name="Jobs" Relationship="MaintenanceTrackerModel.FK__Job__VehicleId__1A14E395" FromRole="Vehicle" ToRole="Job" />
         </EntityType>
         <Association Name="FK__Vehicle__UserId__36B12243">
-          <End Type="MaintenanceTrackerModel.User" Role="User" Multiplicity="1" />
-          <End Type="MaintenanceTrackerModel.Vehicle" Role="Vehicle" Multiplicity="*" />
+          <End Type="MaintenanceTrackerModel.User" Multiplicity="1" Role="User" />
+          <End Type="MaintenanceTrackerModel.Vehicle" Multiplicity="*" Role="Vehicle" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="Vehicle">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Labour">
+          <Key>
+            <PropertyRef Name="LabourId" />
+          </Key>
+          <Property Name="LabourId" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Time" MaxLength="10" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Cost" Precision="19" Scale="4" Type="Decimal" />
+          <Property Name="JobId" Nullable="false" Type="Int32" />
+          <NavigationProperty Name="Job" Relationship="MaintenanceTrackerModel.FK__Labour__Maintena__1B0907CE" FromRole="Labour" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="PartId" />
+          </Key>
+          <Property Name="PartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Job" Relationship="MaintenanceTrackerModel.FK__Part__Maintenanc__1BFD2C07" FromRole="Part" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="JobId" Nullable="false" Type="Int32" />
+          <Property Name="Description" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
+          <NavigationProperty Name="Job" Relationship="MaintenanceTrackerModel.FK__Task__Maintenanc__1CF15040" FromRole="Task" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Km" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Vehicle" Relationship="MaintenanceTrackerModel.FK__Job__VehicleId__1A14E395" FromRole="Job" ToRole="Vehicle" />
+          <NavigationProperty Name="Labours" Relationship="MaintenanceTrackerModel.FK__Labour__Maintena__1B0907CE" FromRole="Job" ToRole="Labour" />
+          <NavigationProperty Name="Parts" Relationship="MaintenanceTrackerModel.FK__Part__Maintenanc__1BFD2C07" FromRole="Job" ToRole="Part" />
+          <NavigationProperty Name="Tasks" Relationship="MaintenanceTrackerModel.FK__Task__Maintenanc__1CF15040" FromRole="Job" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK__Job__VehicleId__1A14E395">
+          <End Type="MaintenanceTrackerModel.Vehicle" Role="Vehicle" Multiplicity="1" />
+          <End Type="MaintenanceTrackerModel.Job" Role="Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Labour__Maintena__1B0907CE">
+          <End Type="MaintenanceTrackerModel.Job" Role="Job" Multiplicity="1" />
+          <End Type="MaintenanceTrackerModel.Labour" Role="Labour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+            </Principal>
+            <Dependent Role="Labour">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Part__Maintenanc__1BFD2C07">
+          <End Type="MaintenanceTrackerModel.Job" Role="Job" Multiplicity="1" />
+          <End Type="MaintenanceTrackerModel.Part" Role="Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__Maintenanc__1CF15040">
+          <End Type="MaintenanceTrackerModel.Job" Role="Job" Multiplicity="1" />
+          <End Type="MaintenanceTrackerModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="JobId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -119,6 +335,46 @@
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="Make" ColumnName="Make" />
                 <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Labours">
+            <EntityTypeMapping TypeName="MaintenanceTrackerModel.Labour">
+              <MappingFragment StoreEntitySet="Labour">
+                <ScalarProperty Name="JobId" ColumnName="MaintenanceId" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="LabourId" ColumnName="LabourId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parts">
+            <EntityTypeMapping TypeName="MaintenanceTrackerModel.Part">
+              <MappingFragment StoreEntitySet="Part">
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="JobId" ColumnName="MaintenanceId" />
+                <ScalarProperty Name="PartId" ColumnName="PartId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="MaintenanceTrackerModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="JobId" ColumnName="MaintenanceId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="MaintenanceTrackerModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="Km" ColumnName="Km" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

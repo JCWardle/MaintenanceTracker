@@ -1,9 +1,18 @@
 ﻿@model MaintenanceTracker.Models.VehicleModel
 
 <tr>
-    <td>@Html.DisplayFor(v => v.Make)</td>
-    <td>@Html.DisplayFor(v => v.Model)</td>
-    <td>@Html.DisplayFor(v => v.Year)</td>
-    <td>@Html.DisplayFor(v => v.Registration)</td>
+    <td>@Html.Encode(Model.Make)</td>
+    <td>@Html.Encode(Model.Model)</td>
+    <td>@Html.Encode(Model.Year)</td>
+    <td> @if(String.IsNullOrWhiteSpace(Model.Registration))
+         {
+             @:N/A
+         }
+         else
+         {
+             @Html.Encode(Model.Registration)
+         }
+    </td>
+    <td>@Html.ActionLink("Edit", "Index", "Maintenance", new { id = Model.Id })</td>
 </tr>
 

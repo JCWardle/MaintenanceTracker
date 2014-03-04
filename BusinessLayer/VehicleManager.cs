@@ -40,5 +40,15 @@ namespace BusinessLayer
         {
             _context.Dispose();
         }
+
+        public bool VehicleBelongsToUser(int vehicleId, string username)
+        {
+            return _context.Users.Where(u => u.Username == username).First().Vehicles.Any(v => v.VehicleId == vehicleId);
+        }
+
+        public IEnumerable<Job> GetMaintenance(int vehicleId)
+        {
+            return _context.Jobs.Where(m => m.VehicleId == vehicleId);
+        }
     }
 }

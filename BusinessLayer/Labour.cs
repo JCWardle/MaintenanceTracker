@@ -12,21 +12,13 @@ namespace BusinessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Vehicle
+    public partial class Labour
     {
-        public Vehicle()
-        {
-            this.Jobs = new HashSet<Job>();
-        }
+        public int LabourId { get; set; }
+        public string Time { get; set; }
+        public Nullable<decimal> Cost { get; set; }
+        public int JobId { get; set; }
     
-        public int VehicleId { get; set; }
-        public string Make { get; set; }
-        public string Model { get; set; }
-        public System.DateTime Year { get; set; }
-        public string Registration { get; set; }
-        public int UserId { get; set; }
-    
-        public virtual User User { get; set; }
-        public virtual ICollection<Job> Jobs { get; set; }
+        public virtual Job Job { get; set; }
     }
 }
