@@ -10,7 +10,7 @@ using System.Web.Security;
 
 namespace MaintenanceTracker.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : SiteController
     {
 
         public ActionResult Register()
@@ -47,6 +47,12 @@ namespace MaintenanceTracker.Controllers
         public ActionResult Login()
         {
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpPost]

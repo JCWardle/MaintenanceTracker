@@ -146,6 +146,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobController.cs" />
+    <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Job\" />
+    <Folder Include="Views\Site\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">

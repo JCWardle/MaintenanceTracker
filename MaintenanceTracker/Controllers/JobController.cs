@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace MaintenanceTracker.Controllers
 {
-    public class JobController : Controller
+    public class JobController : SiteController
     {
         //
         // GET: /Maintenace/
