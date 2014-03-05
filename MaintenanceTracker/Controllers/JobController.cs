@@ -10,17 +10,20 @@ namespace MaintenanceTracker.Controllers
 {
     public class JobController : SiteController
     {
-        //
-        // GET: /Maintenace/
         [Authorize]
-        public ActionResult Index(int vehicleId)
+        public ActionResult Index(int id)
         {
             using(var vehicleManager = new VehicleManager())
             {
-                if(vehicleManager.VehicleBelongsToUser(vehicleId, HttpContext.User.Identity.Name))
+                if(vehicleManager.VehicleBelongsToUser(id, HttpContext.User.Identity.Name))
                 {
-                    var maintenance = vehicleManager.GetMaintenance(vehicleId);
-                    return View(maintenance);
+                    var model = new JobsModel
+                    {
+                        NewJob = new Job(),
+                        JobList = vehicleManager.GetJobs(id),
+                        VehicleName = vehicleManager.GetName(id)
+                    };
+                    return View(model);
                 }
                 else
                     return RedirectToAction("Index", "Home");

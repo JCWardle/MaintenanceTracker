@@ -8,8 +8,10 @@ namespace MaintenanceTracker.Models
 {
     public class JobsModel
     {
-        public List<Job> JobList { get; set; }
+        public IEnumerable<Job> JobList { get; set; }
 
-        public Job NewMaintenance { get; set; }
+        public JobModel NewJob { get; set; }
+
+        public string VehicleName { get; set; }
     }
 }

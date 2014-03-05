@@ -1,0 +1,11 @@
+﻿@model BusinessLayer.Job
+
+<tr>
+    <td>@Html.Encode(Model.Km)</td>
+    <td>@Html.Encode(Model.Description)</td>
+    <td>@Html.Encode(Model.Date)</td>
+
+    @Html.DisplayFor(l => Model.Labours)
+    @Html.DisplayFor(p => Model.Parts)
+    @Html.DisplayFor(t => Model.Tasks)
+</tr>

@@ -46,9 +46,15 @@ namespace BusinessLayer
             return _context.Users.Where(u => u.Username == username).First().Vehicles.Any(v => v.VehicleId == vehicleId);
         }
 
-        public IEnumerable<Job> GetMaintenance(int vehicleId)
+        public IEnumerable<Job> GetJobs(int vehicleId)
         {
-            return _context.Jobs.Where(m => m.VehicleId == vehicleId);
+            return _context.Jobs.Where(m => m.VehicleId == vehicleId).ToList();
+        }
+
+        public string GetName(int id)
+        {
+            var vehicle = _context.Vehicles.Where(v => v.VehicleId == id).First();
+            return String.Format("{0} {1}", vehicle.Model, vehicle.Year);
         }
     }
 }

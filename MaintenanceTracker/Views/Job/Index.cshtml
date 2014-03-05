@@ -1,0 +1,37 @@
+﻿@model MaintenanceTracker.Models.JobsModel
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Jobs</h2>
+
+    @foreach(var j in Model.JobList)
+    {
+        @Html.DisplayFor(job => j)
+    }
+
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>New Job</legend>
+            <ul>
+                <li>
+                    @Html.LabelFor(j => j.NewJob.Description)
+                    @Html.TextBoxFor(j => j.NewJob.Description)
+                    @Html.ValidationMessageFor(j => j.NewJob.Description)
+                </li>
+                <li>
+                    @Html.LabelFor(j => j.NewJob.Date)
+                    @Html.TextBoxFor(j => j.NewJob.Date)
+                    @Html.ValidationMessageFor(j => j.NewJob.Date)
+                </li>
+                <li>
+                    @Html.LabelFor(j => j.NewJob.Km)
+                    @Html.TextBoxFor(j => j.NewJob.Km)
+                    @Html.ValidationMessageFor(j => j.NewJob.Km)
+                </li>
+            </ul>
+            <input type="submit" value="Create new job"/>
+        </fieldset>
+    }

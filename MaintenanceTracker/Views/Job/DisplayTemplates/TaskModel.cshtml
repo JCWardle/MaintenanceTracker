@@ -1,0 +1,16 @@
+﻿@model System.Collections.Generic.IEnumerable<BusinessLayer.Task>
+
+@if (Model.Any())
+{
+    <table>
+    <tr>
+        <th>@Html.LabelFor(t => Model.First().Description)</th>
+    </tr>
+    @foreach(var task in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(t => task.Description)</td>
+        </tr>
+    }
+    </table>
+}
