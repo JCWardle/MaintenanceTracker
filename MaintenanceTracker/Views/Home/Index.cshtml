@@ -1,4 +1,4 @@
-﻿@model MaintenanceTracker.Models.HomeModel
+﻿@model MaintenanceTracker.ViewModels.HomeViewModel
 @{
     ViewBag.Title = "Maintenance Tracker";
 }
@@ -19,7 +19,7 @@
             <th>Year</th>
             <th>Registration</th>
         </tr>
-        @foreach(var v in Model.Vehicles)
+        @foreach (var v in Model.Vehicles)
         {
             @Html.DisplayFor(veh => v);
         }
@@ -32,27 +32,26 @@
 {
     <fieldset>
         <legend>New Vehicle</legend>
-        @{ var newVehicle = new MaintenanceTracker.Models.VehicleModel(); }
         <ul>
             <li>
-                @Html.LabelFor(m => m.NewVehicle.Make)
-                @Html.TextBoxFor(m => m.NewVehicle.Make)
-                @Html.ValidationMessageFor(m => m.NewVehicle.Make)
+                @Html.LabelFor(v => v.Vehicle.Make)
+                @Html.TextBoxFor(v => v.Vehicle.Make)
+                @Html.ValidationMessageFor(v => v.Vehicle.Make)
             </li>
             <li>
-                @Html.LabelFor(m => m.NewVehicle.Model)
-                @Html.TextBoxFor(m => m.NewVehicle.Model)
-                @Html.ValidationMessageFor(m => m.NewVehicle.Model)
+                @Html.LabelFor(v => v.Vehicle.Model)
+                @Html.TextBoxFor(v => v.Vehicle.Model)
+                @Html.ValidationMessageFor(v => v.Vehicle.Model)
             </li>
             <li>
-                @Html.LabelFor(m => m.NewVehicle.Year)
-                @Html.TextBoxFor(m => m.NewVehicle.Year)
-                @Html.ValidationMessageFor(m => m.NewVehicle.Year)
+                @Html.LabelFor(v => v.Vehicle.Year)
+                @Html.TextBoxFor(v => v.Vehicle.Year)
+                @Html.ValidationMessageFor(v => v.Vehicle.Year)
             </li>
             <li>
-                @Html.LabelFor(m => m.NewVehicle.Registration)
-                @Html.TextBoxFor(m => m.NewVehicle.Registration)
-                @Html.ValidationMessageFor(m => m.NewVehicle.Registration)
+                @Html.LabelFor(v => v.Vehicle.Registration)
+                @Html.TextBoxFor(v => v.Vehicle.Registration)
+                @Html.ValidationMessageFor(v => v.Vehicle.Registration)
             </li>
         </ul>
         <input type="submit" value="Create new vehicle"/>

@@ -1,14 +1,15 @@
-﻿using BusinessLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Web;
 
 namespace MaintenanceTracker.Models
 {
-    public class VehicleModel
+    public class Vehicle
     {
+        public int ID {get; set;}
         [Required]
         [Display (Name = "Make")]
         public string Make { get; set; }
@@ -22,18 +23,17 @@ namespace MaintenanceTracker.Models
         public string Year { get; set; }
         [Display (Name = "Registration")]
         public string Registration { get; set; }
-        public int Id { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
+    }
 
-        public static VehicleModel ConvertVehicle(Vehicle v)
+    public class VehicleMap : EntityTypeConfiguration<Vehicle>
+    {
+        public VehicleMap()
         {
-            return new VehicleModel
-            {
-                Make = v.Make,
-                Model = v.Model,
-                Registration = v.Registration,
-                Year = v.Year.Year.ToString(),
-                Id = v.VehicleId
-            };
+            this.HasKey(v => v.ID);
+
+            this.HasRequired(v => v.User).WithMany(s => s.Vehicles).HasForeignKey(u => u.UserId);
         }
     }
 }

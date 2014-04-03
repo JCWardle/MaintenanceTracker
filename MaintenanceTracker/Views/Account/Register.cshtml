@@ -1,4 +1,4 @@
-﻿@model MaintenanceTracker.Models.RegisterModel
+﻿@model MaintenanceTracker.Models.User
 @{
     ViewBag.Title = "Register";
 }
@@ -11,9 +11,6 @@
 @using (Html.BeginForm()){    
     <fieldset>
         <legend>Registration Form</legend>
-        @if (Model != null && !string.IsNullOrWhiteSpace(Model.Error)) {
-            <p class="error">@Model.Error </p>
-        }
         <ul>
             <li>
                 @Html.LabelFor(m => m.Username)
