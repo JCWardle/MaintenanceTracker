@@ -52,9 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MaintenanceTracker\MaintenanceTracker.csproj">
+    <ProjectReference Include="..\MaintenanceTracker\MaintenanceTracker.Web.csproj">
       <Project>{2CC68B78-EECB-4316-9647-85A8F4191C59}</Project>
-      <Name>MaintenanceTracker</Name>
+      <Name>MaintenanceTracker.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

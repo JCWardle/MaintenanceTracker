@@ -15,5 +15,6 @@ namespace MaintenanceTracker.Domain.Model
         public int Kilometres{ get; set; }
         public virtual ICollection<MaintenanceSchedule> MaintenanceSchedules { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
+        public virtual User User { get; set; }
     }
 }

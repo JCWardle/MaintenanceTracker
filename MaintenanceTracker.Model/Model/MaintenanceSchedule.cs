@@ -13,5 +13,6 @@ namespace MaintenanceTracker.Domain.Model
         public virtual ICollection<Part> Parts { get; set; }
         public string Notes { get; set; }
         public int Interval { get; set; }
+        public virtual Vehicle Vehicle { get; set; }
     }
 }

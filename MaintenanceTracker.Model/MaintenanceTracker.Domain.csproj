@@ -7,7 +7,7 @@
     <ProjectGuid>{09B5BEB6-B302-48E2-AF87-6A4BA7689BC9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MaintenanceTracker.Model</RootNamespace>
+    <RootNamespace>MaintenanceTracker.Domain</RootNamespace>
     <AssemblyName>MaintenanceTracker.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -39,13 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMaintenanceStore.cs" />
     <Compile Include="Model\MaintenanceSchedule.cs" />
     <Compile Include="Model\Make.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\Part.cs" />
     <Compile Include="Model\Task.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Model\Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IVehicleStore.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
