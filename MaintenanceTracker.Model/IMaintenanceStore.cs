@@ -8,9 +8,9 @@ namespace MaintenanceTracker.Model
 {
     public interface IMaintenanceStore
     {
-        public void AddSchedule(int vehicleId, MaintenanceSchedule schedule);
+        public void AddSchedule(int vehicleId, Schedule schedule);
         public void AddTask(int vehicleId, Task task);
-        public IEnumerable<MaintenanceSchedule> GetSchedules(int vehicleId);
+        public IEnumerable<Schedule> GetSchedules(int vehicleId);
         public IEnumerable<Task> GetTasks(int vehicleId);
     }
 }

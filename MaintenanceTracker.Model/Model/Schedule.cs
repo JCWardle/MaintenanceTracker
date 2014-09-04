@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaintenanceTracker.Domain.Model
 {
-    public class MaintenanceSchedule
+    public class Schedule
     {
         public int Id {get; set;}
         public string Title { get; set; }
