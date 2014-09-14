@@ -10,10 +10,10 @@ namespace MaintenanceTracker.Model
 {
     public interface IVehicleStore
     {
-        public void AddVehicle(int userId, Vehicle vehicle);
-        public void AddModel(VehicleModel model);
-        public void AddMake(Make make);
-        public void DeleteVehicle(int userId, Vehicle vehicle);
-        public IEnumerable<Vehicle> ListVehicles(int userId);
+        void AddVehicle(int userId, Vehicle vehicle);
+        void AddModel(VehicleModel model);
+        void AddMake(Make make);
+        void DeleteVehicle(int userId, Vehicle vehicle);
+        IEnumerable<Vehicle> ListVehicles(int userId);
     }
 }

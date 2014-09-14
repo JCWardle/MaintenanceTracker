@@ -14,5 +14,7 @@ namespace MaintenanceTracker.Domain.Model
         public decimal Cost { get; set; }
         public string Retailer { get; set; }
         public string Reciept { get; set; }
+        public Schedule Schedule { get; set; }
+        public Task Task { get; set; }
     }
 }
