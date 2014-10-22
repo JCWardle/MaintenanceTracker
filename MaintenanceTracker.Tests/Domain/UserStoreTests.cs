@@ -60,6 +60,34 @@ namespace MaintenanceTracker.Tests.Domain
             context.Verify(c => c.SaveChanges(), Times.Once);
         }
 
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Username required")]
+        public void Add_User_With_No_Username()
+        {
+            var context = new Mock<MaintenanceTrackerContext>();
+            var encrpytor = new Mock<IEncryptor>();
+            var userStore = new UserStore(context.Object, encrpytor.Object);
+
+            userStore.AddUser(new User
+            {
+                Username = ""
+            }, "Password");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Password required")]
+        public void Add_User_With_No_Password()
+        {
+            var context = new Mock<MaintenanceTrackerContext>();
+            var encrpytor = new Mock<IEncryptor>();
+            var userStore = new UserStore(context.Object, encrpytor.Object);
+
+            userStore.AddUser(new User 
+            {
+                Username = "test"
+            }, "");
+        }
+
         private Mock<DbSet<User>> MoqUserList(IQueryable<User> data, Mock<DbSet<User>> users)
         {
             users.As<IQueryable<User>>().Setup(u => u.Provider).Returns(data.Provider);

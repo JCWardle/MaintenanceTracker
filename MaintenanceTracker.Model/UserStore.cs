@@ -19,6 +19,10 @@ namespace MaintenanceTracker.Domain
 
         public void AddUser(User user, string password)
         {
+            if (string.IsNullOrWhiteSpace(user.Username))
+                throw new ArgumentException("Username required");
+            if (string.IsNullOrWhiteSpace(password))
+                throw new ArgumentException("Password required");
             if(_context.Users.Any(u => u.Username == user.Username))
                 throw new ArgumentException("Username already taken");
 
