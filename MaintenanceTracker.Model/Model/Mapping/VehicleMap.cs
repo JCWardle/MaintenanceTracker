@@ -24,7 +24,7 @@ namespace MaintenanceTracker.Domain.Model.Mapping
                 .Map(m => m.MapKey("VehicleId"));
 
             HasRequired(v => v.User)
-                .WithMany(u => u.Vehciles)
+                .WithMany(u => u.Vehicles)
                 .Map(m => m.MapKey("UserId"));
 
             Property(v => v.Year)

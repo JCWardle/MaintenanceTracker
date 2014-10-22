@@ -13,7 +13,7 @@ namespace MaintenanceTracker.Domain.Model.Mapping
         {
             HasKey(u => u.Id);
 
-            HasMany(u => u.Vehciles);
+            HasMany(u => u.Vehicles);
 
             Property(u => u.Username)
                 .HasMaxLength(14);

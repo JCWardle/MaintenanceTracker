@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VehicleModel = MaintenanceTracker.Domain.Model.Model;
 
-namespace MaintenanceTracker.Model
+namespace MaintenanceTracker.Domain
 {
     public interface IVehicleStore
     {
