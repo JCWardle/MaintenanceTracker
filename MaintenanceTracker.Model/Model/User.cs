@@ -12,7 +12,7 @@ namespace MaintenanceTracker.Domain.Model
         public string Username { get; set; }
         public byte[] Password { get; set; }
         public string Email { get; set; }
-        public int Salt { get; set; }
+        public byte[] Salt { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; }
     }
 }

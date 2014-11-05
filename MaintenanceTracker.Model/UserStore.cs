@@ -28,19 +28,36 @@ namespace MaintenanceTracker.Domain
 
             var salt = _encrpytor.GetSalt();
             user.Password = _encrpytor.GetPassword(salt, password);
+            user.Salt = salt;
 
             _context.Users.Add(user);
             _context.SaveChanges();
         }
 
-        public void ChangePassword(int id, string password)
+        public bool Authenticate(string username, string password)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+            
+            if(user == null)
+                return false;
+            else
+                return user.Password == _encrpytor.GetPassword(user.Salt, password);
+        }
+
+        public void ChangePassword(string username, string password)
         {
             throw new NotImplementedException();
         }
 
-        public void ChangeEmail(int id, string email)
+        public void ChangeEmail(string username, string email)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+
+            if (user == null)
+                throw new ArgumentException("User not found");
+
+            user.Email = email;
+            _context.SaveChanges();
         }
         public void Dispose()
         {
