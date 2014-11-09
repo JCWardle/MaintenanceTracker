@@ -46,7 +46,15 @@ namespace MaintenanceTracker.Domain
 
         public void ChangePassword(string username, string password)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+
+            if (user == null)
+                throw new ArgumentException("User not found");
+
+            user.Salt = _encrpytor.GetSalt();
+            user.Password = _encrpytor.GetPassword(user.Salt, password);
+
+            _context.SaveChanges();
         }
 
         public void ChangeEmail(string username, string email)

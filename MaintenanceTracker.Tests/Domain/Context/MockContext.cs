@@ -10,6 +10,9 @@ namespace MaintenanceTracker.Tests.Domain.Context
 {
     class MockContext : IMaintenanceTrackerContext
     {
+        private int _saveChanges = 0;
+
+        public int SaveChangesCalls { get { return _saveChanges; } }
         public MockContext()
         {
             Schedules = new MockDbSet<Schedule>();
@@ -32,6 +35,7 @@ namespace MaintenanceTracker.Tests.Domain.Context
         public DbSet<Vehicle> Vehicles { get; set; }
         public int SaveChanges()
         {
+            _saveChanges++;
             return 1;
         }
     }

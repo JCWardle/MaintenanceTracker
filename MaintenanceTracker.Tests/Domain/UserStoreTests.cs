@@ -52,6 +52,7 @@ namespace MaintenanceTracker.Tests.Domain
             Assert.AreEqual("test", user.Username);
             Assert.AreEqual(password, user.Password);
             Assert.AreEqual(salt, user.Salt);
+            Assert.AreEqual(1, context.SaveChangesCalls);
         }
 
         [Test]
@@ -128,6 +129,7 @@ namespace MaintenanceTracker.Tests.Domain
 
             var user = context.Users.First();
             Assert.AreEqual("test2@test.com", user.Email);
+            Assert.AreEqual(1, context.SaveChangesCalls);
         }
 
         [Test]
@@ -140,6 +142,46 @@ namespace MaintenanceTracker.Tests.Domain
             var userStore = new UserStore(context, encryptor.Object);
 
             userStore.ChangeEmail("test", "test2@test.com");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "User not found")]
+        public void Change_Password_User_Not_Found()
+        {
+            var context = new MockContext();
+            var encryptor = new Mock<IEncryptor>();
+
+            var userStore = new UserStore(context, encryptor.Object);
+
+            userStore.ChangePassword("test", "newPassword");
+        }
+
+        [Test]
+        public void Change_Password()
+        {
+            var context = new MockContext();
+            context.Users.Add(new User
+            { 
+                Username = "test", 
+                Password = new byte[] {1,2,3,4}, 
+                Salt = new byte[] {1,2}
+            });
+
+            var encryptor = new Mock<IEncryptor>();
+            encryptor.Setup(e => e.GetSalt()).Returns(new byte[] { 3, 4 });
+            encryptor.Setup(e => e.GetPassword(new byte[] { 3, 4 }, "newPassword")).Returns(new byte[] { 5, 6, 7, 8 });
+
+            var userStore = new UserStore(context, encryptor.Object);
+
+            userStore.ChangePassword("test", "newPassword");
+
+            encryptor.Verify(e => e.GetPassword(new byte[] { 3, 4 }, "newPassword"), Times.Once);
+            encryptor.Verify(e => e.GetSalt(), Times.Once);
+            var user = context.Users.First();
+            Assert.AreEqual("test", user.Username);
+            Assert.AreEqual(new byte[] { 5, 6, 7, 8 }, user.Password);
+            Assert.AreEqual(new byte[] { 3, 4 }, user.Salt);
+            Assert.AreEqual(1, context.SaveChangesCalls);
         }
     }
 }
