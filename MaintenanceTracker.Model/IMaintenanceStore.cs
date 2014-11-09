@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MaintenanceTracker.Model
+namespace MaintenanceTracker.Domain
 {
     public interface IMaintenanceStore
     {

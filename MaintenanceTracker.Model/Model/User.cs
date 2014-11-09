@@ -10,9 +10,9 @@ namespace MaintenanceTracker.Domain.Model
     {
         public int Id { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
+        public byte[] Password { get; set; }
         public string Email { get; set; }
-        public int Salt { get; set; }
-        public ICollection<Vehicle> Vehciles { get; set; }
+        public byte[] Salt { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; }
     }
 }

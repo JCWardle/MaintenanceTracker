@@ -9,8 +9,9 @@ namespace MaintenanceTracker.Domain
 {
     public interface IUserStore
     {
-        void AddUser(User user);
-        void ChangePassword(int id, string password);
-        void ChangeEmail(int id, string email);
+        void AddUser(User user, string password);
+        void ChangePassword(string username, string password);
+        void ChangeEmail(string username, string email);
+        bool Authenticate(string username, string password);
     }
 }

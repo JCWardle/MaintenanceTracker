@@ -9,15 +9,15 @@ using VehicleModel = MaintenanceTracker.Domain.Model.Model;
 
 namespace MaintenanceTracker.Domain
 {
-    public class MaintenanceTrackerContext : DbContext
+    public class MaintenanceTrackerContext : DbContext, IMaintenanceTrackerContext
     {
-            public DbSet<Schedule> Schedules {get; set;}
-            public DbSet<VehicleModel> Models { get; set; }
-            public DbSet<Task> Tasks { get; set; }
-            public DbSet<User> Users { get; set; }
-            public DbSet<Part> Parts { get; set; }
-            public DbSet<Make> Makes { get; set; }
-            public DbSet<Vehicle> Vehicles { get; set; }
+            public virtual DbSet<Schedule> Schedules {get; set;}
+            public virtual DbSet<VehicleModel> Models { get; set; }
+            public virtual DbSet<Task> Tasks { get; set; }
+            public virtual DbSet<User> Users { get; set; }
+            public virtual DbSet<Part> Parts { get; set; }
+            public virtual DbSet<Make> Makes { get; set; }
+            public virtual DbSet<Vehicle> Vehicles { get; set; }
 
             public MaintenanceTrackerContext() { }
 
