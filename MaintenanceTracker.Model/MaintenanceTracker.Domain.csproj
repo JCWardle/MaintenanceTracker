@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Encryptor.cs" />
     <Compile Include="IEncryptor.cs" />
+    <Compile Include="IMaintenanceTrackerContext.cs" />
     <Compile Include="IMaintenanceStore.cs" />
     <Compile Include="IUserStore.cs" />
     <Compile Include="MaintenanceStore.cs" />

@@ -9,9 +9,9 @@ namespace MaintenanceTracker.Domain
 {
     public class UserStore : IUserStore, IDisposable
     {
-        MaintenanceTrackerContext _context;
+        IMaintenanceTrackerContext _context;
         IEncryptor _encrpytor;
-        public UserStore(MaintenanceTrackerContext context, IEncryptor encryptor)
+        public UserStore(IMaintenanceTrackerContext context, IEncryptor encryptor)
         {
             _context = context;
             _encrpytor = encryptor;
@@ -69,7 +69,7 @@ namespace MaintenanceTracker.Domain
         {
             if(disposing)
             {
-                _context.Dispose();
+                ((IDisposable)_context).Dispose();
                 _context = null;
             }
         }

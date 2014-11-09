@@ -8,9 +8,9 @@ namespace MaintenanceTracker.Domain
 {
     public class VehicleStore : IVehicleStore, IDisposable
     {
-        MaintenanceTrackerContext _context;
+        protected IMaintenanceTrackerContext _context;
 
-        public VehicleStore(MaintenanceTrackerContext context)
+        public VehicleStore(IMaintenanceTrackerContext context)
         {
             _context = context;
         }
@@ -50,7 +50,7 @@ namespace MaintenanceTracker.Domain
         {
             if(disposing)
             {
-                _context.Dispose();
+                ((IDisposable)_context).Dispose();
                 _context = null;
             }
         }

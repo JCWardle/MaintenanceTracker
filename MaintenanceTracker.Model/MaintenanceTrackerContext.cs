@@ -9,7 +9,7 @@ using VehicleModel = MaintenanceTracker.Domain.Model.Model;
 
 namespace MaintenanceTracker.Domain
 {
-    public class MaintenanceTrackerContext : DbContext
+    public class MaintenanceTrackerContext : DbContext, IMaintenanceTrackerContext
     {
             public virtual DbSet<Schedule> Schedules {get; set;}
             public virtual DbSet<VehicleModel> Models { get; set; }

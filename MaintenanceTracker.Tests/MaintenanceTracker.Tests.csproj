@@ -76,7 +76,12 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Context\MockDbAsyncEnumerable.cs" />
+    <Compile Include="Domain\Context\MockDbAsyncEnumerator.cs" />
+    <Compile Include="Domain\Context\MockDbQueryProvider.cs" />
     <Compile Include="Domain\MaintenanceTrackerContextTests.cs" />
+    <Compile Include="Domain\Context\MockContext.cs" />
+    <Compile Include="Domain\Context\MockDbSet.cs" />
     <Compile Include="Domain\UserStoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,39 +6,13 @@ using System.Threading.Tasks;
 
 namespace MaintenanceTracker.Domain
 {
-    public class MaintenanceStore : IVehicleStore, IDisposable
+    public class MaintenanceStore : IMaintenanceStore, IDisposable
     {
-        MaintenanceTrackerContext _context;
-        public MaintenanceStore(MaintenanceTrackerContext context)
+        IMaintenanceTrackerContext _context;
+        public MaintenanceStore(IMaintenanceTrackerContext context)
         {
             _context = context;
         }
-
-        public void AddVehicle(int userId, Model.Vehicle vehicle)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddModel(Model.Model model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddMake(Model.Make make)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteVehicle(int userId, Model.Vehicle vehicle)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Model.Vehicle> ListVehicles(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Dispose()
         {
             Dispose(true);
@@ -49,9 +23,29 @@ namespace MaintenanceTracker.Domain
         {
             if(disposing)
             {
-                _context.Dispose();
+                ((IDisposable)_context).Dispose();
                 _context = null;
             }
+        }
+
+        public void AddSchedule(int vehicleId, Model.Schedule schedule)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddTask(int vehicleId, Model.Task task)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Model.Schedule> GetSchedules(int vehicleId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Model.Task> GetTasks(int vehicleId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
