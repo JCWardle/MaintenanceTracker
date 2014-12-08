@@ -96,7 +96,7 @@ namespace MaintenanceTracker.Tests.Domain
             Assert.AreEqual(1, context.SaveChangesCalls);
         }
 
-        [Test, ExpectedException(ExpectedException = typeof(ArgumentException), ExpectedMessage = "That model already exists")]
+        [Test, ExpectedException(ExpectedException = typeof(ArgumentException), ExpectedMessage = "Model already exists")]
         public void Add_Duplicate_Model()
         {
             var context = new MockContext();
@@ -129,16 +129,21 @@ namespace MaintenanceTracker.Tests.Domain
             };
 
             context.Models.Add(model);
-            model.Make = new Make()
+            model = new Model() 
             {
                 Id = 3,
-                Name = "Suzoooki"
+                Name = "Klaker",
+                Make = new Make
+                {
+                    Id = 3,
+                    Name = "Suzoooki"
+                }
             };
 
             store.AddModel(model);
 
             model = context.Models.Last();
-            Assert.AreEqual(2, model.Id);
+            Assert.AreEqual(3, model.Id);
             Assert.AreEqual("Klaker", model.Name);
 
             var make = model.Make;
@@ -165,7 +170,7 @@ namespace MaintenanceTracker.Tests.Domain
             Assert.AreEqual(1, context.SaveChangesCalls);
         }
 
-        [Test, ExpectedException( ExpectedException = typeof(ArgumentException), ExpectedMessage = "The make already exists")]
+        [Test, ExpectedException( ExpectedException = typeof(ArgumentException), ExpectedMessage = "Make already exists")]
         public void Add_Duplicate_Make()
         {
             var context = new MockContext();
