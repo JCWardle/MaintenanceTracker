@@ -67,6 +67,7 @@ namespace MaintenanceTracker.Domain
             user.Email = email;
             _context.SaveChanges();
         }
+
         public void Dispose()
         {
             Dispose(true);
