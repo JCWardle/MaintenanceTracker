@@ -16,12 +16,26 @@ namespace MaintenanceTracker.Domain
 
         public void AddSchedule(int vehicleId, Model.Schedule schedule)
         {
-            throw new NotImplementedException();
+            var vehicle = _context.Vehicles.FirstOrDefault(v => v.Id == vehicleId);
+
+            if (vehicle == null)
+                throw new ArgumentException("Invalid Vehicle");
+
+            schedule.Vehicle = vehicle;
+
+            _context.Schedules.Add(schedule);
         }
 
         public void AddTask(int vehicleId, Model.Task task)
         {
-            throw new NotImplementedException();
+            var vehicle = _context.Vehicles.FirstOrDefault(v => v.Id == vehicleId);
+
+            if (vehicle == null)
+                throw new ArgumentException("Invalid Vehicle");
+
+            task.Vehicle = vehicle;
+
+            _context.Tasks.Add(task);
         }
 
         public IEnumerable<Model.Schedule> GetSchedules(int vehicleId, int page, int pageSize)
