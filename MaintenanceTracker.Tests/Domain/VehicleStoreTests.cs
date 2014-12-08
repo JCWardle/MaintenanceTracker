@@ -220,5 +220,74 @@ namespace MaintenanceTracker.Tests.Domain
 
             store.DeleteVehicle(2, 2);
         }
+
+        [Test]
+        public void List_One_Vehicle()
+        {
+            var context = new MockContext();
+            context.Vehicles.Add(new Vehicle
+            {
+                Id = 1,
+                Kilometres = 1337,
+                Model = _model,
+                User = _user
+            });
+            var store = new VehicleStore(context);
+
+            var result = store.ListVehicles(_user.Id);
+
+            Assert.AreEqual(1, result.Count());
+            var vehicle = result.First();
+            Assert.AreEqual(1337, vehicle.Kilometres);
+            Assert.AreEqual(1, vehicle.Id);
+            Assert.AreEqual(_user, vehicle.User);
+            Assert.AreEqual(_model, vehicle.Model);
+        }
+
+        [Test]
+        public void List_Two_Vehicles()
+        {
+            var context = new MockContext();
+            context.Vehicles.Add(new Vehicle
+            {
+                Id = 1,
+                Kilometres = 1337,
+                Model = _model,
+                User = _user
+            });
+            context.Vehicles.Add(new Vehicle
+            {
+                Id = 2,
+                Kilometres = 1338,
+                Model = _model,
+                User = _user
+            });
+            var store = new VehicleStore(context);
+
+            var result = store.ListVehicles(_user.Id);
+
+            Assert.AreEqual(2, result.Count());
+            var vehicle = result.First();
+            Assert.AreEqual(1337, vehicle.Kilometres);
+            Assert.AreEqual(1, vehicle.Id);
+            Assert.AreEqual(_user, vehicle.User);
+            Assert.AreEqual(_model, vehicle.Model);
+            vehicle = result.Last();
+            Assert.AreEqual(1338, vehicle.Kilometres);
+            Assert.AreEqual(2, vehicle.Id);
+            Assert.AreEqual(_user, vehicle.User);
+            Assert.AreEqual(_model, vehicle.Model);
+        }
+
+        [Test]
+        public void List_Empty_Vehicles()
+        {
+            var context = new MockContext();
+            var store = new VehicleStore(context);
+
+            var result = store.ListVehicles(_user.Id);
+
+            Assert.AreEqual(0, result.Count());
+        }
     }
 }

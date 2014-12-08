@@ -61,7 +61,7 @@ namespace MaintenanceTracker.Domain
 
         public IEnumerable<Model.Vehicle> ListVehicles(int userId)
         {
-            throw new NotImplementedException();
+            return _context.Vehicles.Where(v => v.User.Id == userId);
         }
 
         public void Dispose()
