@@ -30,7 +30,7 @@ namespace MaintenanceTracker.Domain
             throw new NotImplementedException();
         }
 
-        public void DeleteVehicle(int userId, Model.Vehicle vehicle)
+        public void DeleteVehicle(int userId, int vehicle)
         {
             throw new NotImplementedException();
         }

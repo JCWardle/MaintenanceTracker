@@ -13,7 +13,7 @@ namespace MaintenanceTracker.Domain
         void AddVehicle(int userId, Vehicle vehicle);
         void AddModel(VehicleModel model);
         void AddMake(Make make);
-        void DeleteVehicle(int userId, Vehicle vehicle);
+        void DeleteVehicle(int userId, int vehicle);
         IEnumerable<Vehicle> ListVehicles(int userId);
     }
 }

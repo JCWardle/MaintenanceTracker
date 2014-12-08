@@ -84,6 +84,7 @@
     <Compile Include="Domain\Context\MockContext.cs" />
     <Compile Include="Domain\Context\MockDbSet.cs" />
     <Compile Include="Domain\UserStoreTests.cs" />
+    <Compile Include="Domain\VehicleStoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
