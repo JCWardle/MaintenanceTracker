@@ -13,20 +13,6 @@ namespace MaintenanceTracker.Domain
         {
             _context = context;
         }
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if(disposing)
-            {
-                _context.Dispose();
-                _context = null;
-            }
-        }
 
         public void AddSchedule(int vehicleId, Model.Schedule schedule)
         {
@@ -38,14 +24,29 @@ namespace MaintenanceTracker.Domain
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Model.Schedule> GetSchedules(int vehicleId)
+        public IEnumerable<Model.Schedule> GetSchedules(int vehicleId, int page, int pageSize)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Model.Task> GetTasks(int vehicleId)
+        public IEnumerable<Model.Task> GetTasks(int vehicleId, int page, int pageSize)
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+                _context = null;
+            }
         }
     }
 }

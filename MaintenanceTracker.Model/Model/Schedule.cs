@@ -8,7 +8,7 @@ namespace MaintenanceTracker.Domain.Model
 {
     public class Schedule
     {
-        public int Id {get; set;}
+        public int Id { get; set; }
         public string Title { get; set; }
         public virtual ICollection<Part> Parts { get; set; }
         public string Notes { get; set; }

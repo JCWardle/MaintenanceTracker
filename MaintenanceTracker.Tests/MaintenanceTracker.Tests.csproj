@@ -80,6 +80,7 @@
     <Compile Include="Domain\Context\MockDbAsyncEnumerator.cs" />
     <Compile Include="Domain\Context\MockDbQueryProvider.cs" />
     <Compile Include="Domain\Encrypter_Tests.cs" />
+    <Compile Include="Domain\MaintenanceStoreTests.cs" />
     <Compile Include="Domain\MaintenanceTrackerContextTests.cs" />
     <Compile Include="Domain\Context\MockContext.cs" />
     <Compile Include="Domain\Context\MockDbSet.cs" />
