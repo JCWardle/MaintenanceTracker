@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MaintenanceTracker.Domain
 {
-    public interface IMaintenanceStore
+    public interface IMaintenanceStore : IDisposable
     {
         void AddSchedule(int vehicleId, Schedule schedule);
         void AddTask(int vehicleId, Task task);

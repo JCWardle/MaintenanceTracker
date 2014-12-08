@@ -38,5 +38,10 @@ namespace MaintenanceTracker.Tests.Domain.Context
             _saveChanges++;
             return 1;
         }
+
+        public void Dispose()
+        {
+            
+        }
     }
 }

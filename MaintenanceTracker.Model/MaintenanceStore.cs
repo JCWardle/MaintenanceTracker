@@ -23,7 +23,7 @@ namespace MaintenanceTracker.Domain
         {
             if(disposing)
             {
-                ((IDisposable)_context).Dispose();
+                _context.Dispose();
                 _context = null;
             }
         }

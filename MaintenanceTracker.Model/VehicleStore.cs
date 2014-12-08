@@ -17,7 +17,7 @@ namespace MaintenanceTracker.Domain
 
         public void AddVehicle(int userId, Model.Vehicle vehicle)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void AddModel(Model.Model model)
@@ -50,7 +50,7 @@ namespace MaintenanceTracker.Domain
         {
             if(disposing)
             {
-                ((IDisposable)_context).Dispose();
+                _context.Dispose();
                 _context = null;
             }
         }

@@ -8,7 +8,7 @@ using VehicleModel = MaintenanceTracker.Domain.Model.Model;
 
 namespace MaintenanceTracker.Domain
 {
-    public interface IMaintenanceTrackerContext
+    public interface IMaintenanceTrackerContext : IDisposable
     {
         DbSet<Schedule> Schedules { get; set; }
         DbSet<VehicleModel> Models { get; set; }

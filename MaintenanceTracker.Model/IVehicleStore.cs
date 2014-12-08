@@ -8,7 +8,7 @@ using VehicleModel = MaintenanceTracker.Domain.Model.Model;
 
 namespace MaintenanceTracker.Domain
 {
-    public interface IVehicleStore
+    public interface IVehicleStore : IDisposable
     {
         void AddVehicle(int userId, Vehicle vehicle);
         void AddModel(VehicleModel model);

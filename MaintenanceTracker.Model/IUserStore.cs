@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MaintenanceTracker.Domain
 {
-    public interface IUserStore
+    public interface IUserStore : IDisposable
     {
         void AddUser(User user, string password);
         void ChangePassword(string username, string password);
