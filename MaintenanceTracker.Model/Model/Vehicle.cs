@@ -13,8 +13,7 @@ namespace MaintenanceTracker.Domain.Model
         public virtual VehicleModel Model { get; set; }
         public string Year { get; set; }
         public int Kilometres{ get; set; }
-        public virtual ICollection<Schedule> Schedules { get; set; }
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<WorkItem> WorkItems { get; set; }
         public virtual User User { get; set; }
     }
 }

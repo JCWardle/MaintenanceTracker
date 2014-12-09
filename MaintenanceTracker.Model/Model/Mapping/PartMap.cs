@@ -24,13 +24,9 @@ namespace MaintenanceTracker.Domain.Model.Mapping
                 .IsOptional()
                 .HasMaxLength(512);
 
-            HasOptional(p => p.Schedule)
+            HasOptional(p => p.WorkItem)
                 .WithMany(p => p.Parts)
-                .Map(m => m.MapKey("ScheduleId"));
-
-            HasOptional(p => p.Task)
-                .WithMany(p => p.Parts)
-                .Map(m => m.MapKey("TaskId"));
+                .Map(m => m.MapKey("WorkItemId"));
 
             ToTable("Part");
         }

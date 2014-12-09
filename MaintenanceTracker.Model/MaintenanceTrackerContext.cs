@@ -30,6 +30,7 @@ namespace MaintenanceTracker.Domain
                 modelBuilder.Configurations.Add(new UserMap());
                 modelBuilder.Configurations.Add(new VehicleMap());
                 modelBuilder.Configurations.Add(new TaskMap());
+                modelBuilder.Configurations.Add(new WorkItemMap());
             }
     }
 }

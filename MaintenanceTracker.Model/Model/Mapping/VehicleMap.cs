@@ -15,13 +15,9 @@ namespace MaintenanceTracker.Domain.Model.Mapping
 
             HasRequired(v => v.Model);
 
-            HasMany(v => v.Schedules)
+            HasMany(v => v.WorkItems)
                 .WithRequired(s => s.Vehicle)
-                .Map(m => m.MapKey("ScheduleId"));
-
-            HasMany(v => v.Tasks)
-                .WithRequired(t => t.Vehicle)
-                .Map(m => m.MapKey("VehicleId"));
+                .Map(m => m.MapKey("WorkItemId"));
 
             HasRequired(v => v.User)
                 .WithMany(u => u.Vehicles)

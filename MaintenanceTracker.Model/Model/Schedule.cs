@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace MaintenanceTracker.Domain.Model
 {
-    public class Schedule
+    public class Schedule : WorkItem
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public virtual ICollection<Part> Parts { get; set; }
-        public string Notes { get; set; }
-        public int Interval { get; set; }
-        public virtual Vehicle Vehicle { get; set; }
+        public DateTime TimeInterval { get; set; }
+        public int DistanceInterval { get; set; }
     }
 }

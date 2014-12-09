@@ -30,7 +30,7 @@ namespace MaintenanceTracker.Tests.Domain
             store.AddSchedule(1, new Schedule
             {
                 Id = 1,
-                Interval = 100,
+                DistanceInterval = 100,
                 Notes = "Test",
                 Parts = new List<Part>() { new Part { Id = 1, Cost = 2.00m, Name = "test" } },
                 Title = "TestTitle"
@@ -39,7 +39,7 @@ namespace MaintenanceTracker.Tests.Domain
             Assert.AreEqual(1, context.Schedules.Count());
             var schedule = context.Schedules.First();
             Assert.AreEqual(1, schedule.Id);
-            Assert.AreEqual(100, schedule.Interval);
+            Assert.AreEqual(100, schedule.DistanceInterval);
             Assert.AreEqual("Test", schedule.Notes);
             Assert.AreEqual("TestTitle", schedule.Title);
             Assert.AreEqual(1, schedule.Parts.Count());

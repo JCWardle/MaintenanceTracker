@@ -60,6 +60,7 @@
     <Compile Include="Model\Mapping\TaskMap.cs" />
     <Compile Include="Model\Mapping\UserMap.cs" />
     <Compile Include="Model\Mapping\VehicleMap.cs" />
+    <Compile Include="Model\Mapping\WorkItemMap.cs" />
     <Compile Include="Model\Schedule.cs" />
     <Compile Include="Model\Make.cs" />
     <Compile Include="Model\Model.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Vehicle.cs" />
+    <Compile Include="Model\WorkItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IVehicleStore.cs" />
     <Compile Include="UserStore.cs" />

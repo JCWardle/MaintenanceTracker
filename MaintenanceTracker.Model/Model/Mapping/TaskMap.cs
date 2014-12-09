@@ -11,13 +11,7 @@ namespace MaintenanceTracker.Domain.Model.Mapping
     {
         internal TaskMap()
         {
-            HasKey(t => t.Id);
-
-            Property(t => t.Title)
-                .HasMaxLength(50);
-
-            Property(t => t.Notes)
-                .HasMaxLength(2048);
+            Property(t => t.Started).IsRequired();
         }
     }
 }
