@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MaintenanceTask = MaintenanceTracker.Domain.Model.Task;
 
 namespace MaintenanceTracker.Tests.Domain
 {
@@ -20,6 +21,25 @@ namespace MaintenanceTracker.Tests.Domain
             User = new User { Id = 1, Username = "test" }
         };
 
+        private List<Schedule> _schedules = new List<Schedule>();
+        private List<MaintenanceTask> _tasks = new List<MaintenanceTask>();
+
+        public MaintenanceStoreTests()
+        {
+            var otherVehicle = new Vehicle { Id = 2, Kilometres = 2000, User = new User { Id = 2, Username = "test2" } };
+            _schedules.Add(new Schedule { Id = 1, Title = "Oil", Vehicle = _vehicle });
+            _schedules.Add(new Schedule { Id = 2, Title = "Spark Plug", Vehicle = _vehicle });
+            _schedules.Add(new Schedule { Id = 3, Title = "Cable", Vehicle = _vehicle });
+            _schedules.Add(new Schedule { Id = 4, Title = "Exhaust", Vehicle = otherVehicle });
+            _schedules.Add(new Schedule { Id = 5, Title = "Intake", Vehicle = otherVehicle });
+
+            _tasks.Add(new MaintenanceTask { Id = 6, Title = "Tyre", Vehicle = _vehicle, Started = new DateTime(2013, 7, 1) });
+            _tasks.Add(new MaintenanceTask { Id = 7, Title = "Chain", Vehicle = _vehicle, Started = new DateTime(2013, 7, 2) });
+            _tasks.Add(new MaintenanceTask { Id = 8, Title = "Sproket", Vehicle = _vehicle, Started = new DateTime(2013, 7, 3) });
+            _tasks.Add(new MaintenanceTask { Id = 9, Title = "Seat", Vehicle = otherVehicle, Started = new DateTime(2013, 7, 4) });
+            _tasks.Add(new MaintenanceTask { Id = 10, Title = "Air Filter", Vehicle = otherVehicle, Started = new DateTime(2013, 7, 5) });
+        }
+
         [Test]
         public void Add_Schedule()
         {
@@ -27,7 +47,7 @@ namespace MaintenanceTracker.Tests.Domain
             context.Vehicles.Add(_vehicle);
             var store = new MaintenanceStore(context);
 
-            store.AddSchedule(1, new Schedule
+            store.AddWorkItem(1, new Schedule
             {
                 Id = 1,
                 DistanceInterval = 100,
@@ -55,7 +75,7 @@ namespace MaintenanceTracker.Tests.Domain
             var context = new MockContext();
             var store = new MaintenanceStore(context);
 
-            store.AddSchedule(0, new Schedule());
+            store.AddWorkItem(0, new Schedule());
         }
 
         [Test]
@@ -65,7 +85,7 @@ namespace MaintenanceTracker.Tests.Domain
             context.Vehicles.Add(_vehicle);
             var store = new MaintenanceStore(context);
 
-            store.AddTask(1, new MaintenanceTracker.Domain.Model.Task
+            store.AddWorkItem(1, new MaintenanceTracker.Domain.Model.Task
             {
                 Id = 1,
                 Notes = "Test Notes",
@@ -91,7 +111,197 @@ namespace MaintenanceTracker.Tests.Domain
             var context = new MockContext();
             var store = new MaintenanceStore(context);
 
-            store.AddTask(0, new MaintenanceTracker.Domain.Model.Task());
+            store.AddWorkItem(0, new MaintenanceTracker.Domain.Model.Task());
+        }
+
+        [Test]
+        public void List_All_Schedules()
+        {
+            var context = new MockContext();
+            context.Schedules.Add(_schedules[0]);
+            context.Schedules.Add(_schedules[1]);
+            var store = new MaintenanceStore(context);
+
+            var result = store.GetSchedules(_vehicle.Id, null, null).ToList();
+
+            Assert.AreEqual(2, result.Count);
+            var schedule1 = result[0];
+            Assert.AreEqual(1, schedule1.Id);
+            Assert.AreEqual(_vehicle, schedule1.Vehicle);
+            Assert.AreEqual("oil", schedule1.Title);
+
+            var schedule2 = result[1];
+            Assert.AreEqual(2, schedule2.Id);
+            Assert.AreEqual(_vehicle, schedule2.Vehicle);
+            Assert.AreEqual("oil2", schedule2.Title);
+        }
+
+        [Test]
+        public void List_All_Tasks()
+        {
+            var context = new MockContext();
+            context.Tasks.Add(_tasks[0]);
+            context.Tasks.Add(_tasks[1]);
+            var store = new MaintenanceStore(context);
+
+            var result = store.GetTasks(_vehicle.Id, null, null).ToList();
+
+            Assert.AreEqual(2, result.Count);
+            var task1 = result[0];
+            Assert.AreEqual(1, task1.Id);
+            Assert.AreEqual(_vehicle, task1.Vehicle);
+            Assert.AreEqual("oil", task1.Title);
+
+            var task2 = result[1];
+            Assert.AreEqual(2, task2.Id);
+            Assert.AreEqual(_vehicle, task2.Vehicle);
+            Assert.AreEqual("oil2", task2.Title);
+        }
+
+        [Test]
+        public void List_First_Page_Of_Tasks_Inorder()
+        {
+            var context = new MockContext();
+            context.Tasks.AddRange(_tasks);
+            var store = new MaintenanceStore(context);
+
+            var result = store.GetTasks(1, 1, 2).ToList();
+
+            Assert.AreEqual(2, result.Count());
+            var first = result[0];
+            Assert.AreEqual(1, first.Vehicle.Id);
+            Assert.AreEqual(8, first.Id);
+            Assert.AreEqual("Sprocket", first.Title);
+
+            var second = result[1];
+            Assert.AreEqual(1, second.Vehicle.Id);
+            Assert.AreEqual(7, second.Id);
+            Assert.AreEqual("Chain", second.Title);
+        }
+
+        [Test]
+        public void List_First_Page_Of_Schedules_Inorder()
+        {
+            var context = new MockContext();
+            context.Schedules.AddRange(_schedules);
+            var store = new MaintenanceStore(context);
+
+            var result = store.GetSchedules(1, 1, 2).ToList();
+
+            Assert.AreEqual(2, result.Count());
+            var first = result[0];
+            Assert.AreEqual(1, first.Vehicle.Id);
+            Assert.AreEqual(3, first.Id);
+            Assert.AreEqual("Spark Plug", first.Title);
+
+            var second = result[1];
+            Assert.AreEqual(1, second.Vehicle.Id);
+            Assert.AreEqual(2, second.Id);
+            Assert.AreEqual("Cable", second.Title);
+        }
+
+        [Test]
+        public void List_Second_Page_Of_Schedules_Inorder()
+        {
+            var context = new MockContext();
+            context.Schedules.AddRange(_schedules);
+            var store = new MaintenanceStore(context);
+
+            var result = store.GetSchedules(1, 1, 2).ToList();
+
+            Assert.AreEqual(1, result.Count());
+            var first = result[0];
+            Assert.AreEqual(1, first.Vehicle.Id);
+            Assert.AreEqual(1, first.Id);
+            Assert.AreEqual("Oil", first.Title);
+        }
+
+        [Test]
+        public void List_Second_Page_Of_Tasks_Inorder()
+        {
+            var context = new MockContext();
+            context.Schedules.AddRange(_schedules);
+            var store = new MaintenanceStore(context);
+
+            var result = store.GetSchedules(1, 1, 2).ToList();
+
+            Assert.AreEqual(1, result.Count());
+            var first = result[0];
+            Assert.AreEqual(1, first.Vehicle.Id);
+            Assert.AreEqual(6, first.Id);
+            Assert.AreEqual("Tyre", first.Title);
+        }
+
+        [Test, ExpectedException( ExpectedException = typeof(ArgumentException), ExpectedMessage = "Invalid Page Size")]
+        public void Task_Null_Page_Size()
+        {
+            var context = new MockContext();
+            var store = new MaintenanceStore(context);
+
+            store.GetTasks(1, 1, null);
+        }
+
+        [Test, ExpectedException(ExpectedException = typeof(ArgumentException), ExpectedMessage = "Invalid Page Size")]
+        public void Schedule_Null_Page_Size()
+        {
+            var context = new MockContext();
+            var store = new MaintenanceStore(context);
+
+            store.GetSchedules(1, 1, null);
+        }
+
+        [Test, ExpectedException(ExpectedException = typeof(ArgumentException), ExpectedMessage = "Invalid Page Size")]
+        public void Task_Negative_Page_Size()
+        {
+            var context = new MockContext();
+            var store = new MaintenanceStore(context);
+
+            store.GetTasks(1, 1, -1);
+        }
+
+        [Test, ExpectedException(ExpectedException = typeof(ArgumentException), ExpectedMessage = "Invalid Page Size")]
+        public void Schedule_Negative_Page_Size()
+        {
+            var context = new MockContext();
+            var store = new MaintenanceStore(context);
+
+            store.GetSchedules(1, 1, -1);
+        }
+
+        [Test, ExpectedException(ExpectedException = typeof(ArgumentException), ExpectedMessage = "Invalid Page Size")]
+        public void Task_Null_Page_With_Page_Size()
+        {
+            var context = new MockContext();
+            var store = new MaintenanceStore(context);
+
+            store.GetTasks(1, null, 1);
+        }
+
+        [Test, ExpectedException(ExpectedException = typeof(ArgumentException), ExpectedMessage = "Invalid Page Size")]
+        public void Schedule_Null_Page_With_Page_Size()
+        {
+            var context = new MockContext();
+            var store = new MaintenanceStore(context);
+
+            store.GetSchedules(1, null, 1);
+        }
+
+        [Test, ExpectedException(ExpectedException = typeof(ArgumentException), ExpectedMessage = "Invalid Page Size")]
+        public void Task_Negative_Page_With_Page_Size()
+        {
+            var context = new MockContext();
+            var store = new MaintenanceStore(context);
+
+            store.GetTasks(1, -1, 1);
+        }
+
+        [Test, ExpectedException(ExpectedException = typeof(ArgumentException), ExpectedMessage = "Invalid Page Size")]
+        public void Schedule_Negative_Page_With_Page_Size()
+        {
+            var context = new MockContext();
+            var store = new MaintenanceStore(context);
+
+            store.GetSchedules(1, -1, 1);
         }
     }
 }
