@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MaintenanceTracker.Domain
 {
-    internal class Encryptor : IEncryptor
+    public class Encryptor : IEncryptor
     {
         private const int PASSWORD_SIZE = 50;
 

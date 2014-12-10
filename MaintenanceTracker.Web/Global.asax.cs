@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaintenanceTracker.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,11 @@ namespace MaintenanceTracker
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ControllerBuilder.Current.SetControllerFactory(typeof(ControllerFactory));
+
+            var container = Bootstrapper.Initialise();
+            UnityConfig.RegisterTypes(container);
+            ControllerFactory.MvcContainer.Container = container;
         }
     }
 }
