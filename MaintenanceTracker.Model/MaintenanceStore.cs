@@ -32,14 +32,14 @@ namespace MaintenanceTracker.Domain
             _context.SaveChanges();
         }
 
-        public IEnumerable<Model.Schedule> GetSchedules(int vehicleId, int? page, int? pageSize)
+        public IEnumerable<Model.Schedule> GetSchedules(int vehicleId)
         {
-            throw new NotImplementedException();
+            return _context.Schedules.Where(v => v.Vehicle.Id == vehicleId);
         }
 
-        public IEnumerable<Model.Task> GetTasks(int vehicleId, int? page, int? pageSize)
+        public IEnumerable<Model.Task> GetTasks(int vehicleId)
         {
-            throw new NotImplementedException();
+            return _context.Tasks.Where(v => v.Vehicle.Id == vehicleId);
         }
 
         public void Dispose()

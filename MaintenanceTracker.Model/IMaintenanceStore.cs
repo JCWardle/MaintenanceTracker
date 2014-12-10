@@ -9,7 +9,7 @@ namespace MaintenanceTracker.Domain
     public interface IMaintenanceStore : IDisposable
     {
         void AddWorkItem(int vehicleId, WorkItem item);
-        IEnumerable<Schedule> GetSchedules(int vehicleId, int? page, int? pageSize);
-        IEnumerable<Task> GetTasks(int vehicleId, int? page, int? pageSize);
+        IEnumerable<Schedule> GetSchedules(int vehicleId);
+        IEnumerable<Task> GetTasks(int vehicleId);
     }
 }
