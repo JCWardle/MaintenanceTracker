@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace MaintenanceTracker
+namespace MaintenanceTracker.Web
 {
     public class ControllerFactory : DefaultControllerFactory
     {

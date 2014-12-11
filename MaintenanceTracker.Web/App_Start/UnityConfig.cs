@@ -3,7 +3,7 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using MaintenanceTracker.Domain;
 
-namespace MaintenanceTracker.App_Start
+namespace MaintenanceTracker.Web.App_Start
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.

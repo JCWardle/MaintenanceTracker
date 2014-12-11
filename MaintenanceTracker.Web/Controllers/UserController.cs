@@ -1,11 +1,12 @@
 ﻿using MaintenanceTracker.Domain;
+using MaintenanceTracker.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MaintenanceTracker.Controllers
+namespace MaintenanceTracker.Web.Controllers
 {
     public class UserController : Controller
     {
@@ -18,7 +19,7 @@ namespace MaintenanceTracker.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(new LoginViewModel());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using MaintenanceTracker.App_Start;
+﻿using MaintenanceTracker.Web.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace MaintenanceTracker
+namespace MaintenanceTracker.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {

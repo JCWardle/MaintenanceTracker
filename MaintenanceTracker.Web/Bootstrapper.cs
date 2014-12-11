@@ -2,7 +2,7 @@ using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc4;
 
-namespace MaintenanceTracker
+namespace MaintenanceTracker.Web
 {
   public static class Bootstrapper
   {
