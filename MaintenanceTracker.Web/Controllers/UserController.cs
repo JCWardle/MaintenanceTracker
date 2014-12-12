@@ -19,7 +19,7 @@ namespace MaintenanceTracker.Web.Controllers
 
         public ActionResult Index()
         {
-            return View(new LoginViewModel());
+            return View();
         }
     }
 }
