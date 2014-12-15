@@ -1,0 +1,22 @@
+﻿@model MaintenanceTracker.Web.ViewModels.LoginViewModel
+<div class="well">
+    @using (Html.BeginForm("Index", "User", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Username)
+            @Html.EditorFor(m => m.Username)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password)
+            @Html.EditorFor(m => m.Password)
+        </div>
+        <div class="checkbox">
+            @Html.LabelFor(m => m.RememberMe)
+            @Html.EditorFor(m => m.RememberMe)
+        </div>
+        <button type="submit" class="btn btn-success btn-block">
+            Login
+        </button>
+        @Html.ActionLink("Forgot Password", "Forgot", "User", new { @class = "btn btn-default btn-block" })
+    }
+</div>

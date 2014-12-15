@@ -1,37 +1,13 @@
-﻿@model MaintenanceTracker.Web.ViewModels.LoginViewModel
+﻿@model MaintenanceTracker.Web.ViewModels.HomeViewModel
 @{
     ViewBag.Title = "Index";
 }
 
 <div class="row">
     <div class="col-xs-6">
-        <div class="well">
-            @using (Html.BeginForm("Index", "User", FormMethod.Post))
-            {
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Username)
-                    @Html.EditorFor(m => m.Username)
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password)
-                    @Html.EditorFor(m => m.Password)
-                </div>
-                <div class="checkbox">
-                    @Html.LabelFor(m => m.RememberMe)
-                    @Html.EditorFor(m => m.RememberMe)
-                </div>
-                <button type="submit" class="btn btn-success btn-block">
-                    Login
-                </button>
-                @Html.ActionLink("Forgot Password", "Forgot", "User", new { @class = "btn btn-default btn-block"} )
-                <a href="/forgot/" class="btn btn-default btn-block">Help to login</a>
-            }
-        </div>
+        @Html.RenderPartial("Login", Model.Login)
     </div>
     <div class="col-xs-6">
-        <p class="lead">Register now for <span class="text-success">FREE</span></p>
-        <ul class="list-unstyled">
-            <li><span class=""</li>
-        </ul>
+        @Html.RenderPartial("Register", Model.Register)
     </div>
 </div>
