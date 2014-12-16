@@ -19,7 +19,12 @@ namespace MaintenanceTracker.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var model = new HomeViewModel
+            {
+                Login = new LoginViewModel(),
+                Register = new RegisterViewModel()
+            };
+            return View(model);
         }
     }
 }

@@ -2,17 +2,29 @@
 <div class="well">
     @using (Html.BeginForm("Index", "User", FormMethod.Post))
     {
-        <div class="form-group">
-            @Html.LabelFor(m => m.Username)
-            @Html.EditorFor(m => m.Username)
+        <div class="form-group row">
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.Username)
+            </div>
+            <div class="col-md-9">
+                @Html.EditorFor(m => m.Username)
+            </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Password)
-            @Html.EditorFor(m => m.Password)
+        <div class="form-group row">
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.Password)
+            </div>
+            <div class="col-md-9">
+                @Html.EditorFor(m => m.Password)
+            </div>
         </div>
-        <div class="checkbox">
-            @Html.LabelFor(m => m.RememberMe)
-            @Html.EditorFor(m => m.RememberMe)
+        <div class="form-group row">
+            <div class="col-xs-5 col-sm-6 col-md-3">
+                @Html.LabelFor(m => m.RememberMe)
+            </div>
+            <div class="col-xs-7 col-sm-6 col-md-9">
+                @Html.EditorFor(m => m.RememberMe, new { @class = "checkbox" })
+            </div>
         </div>
         <button type="submit" class="btn btn-success btn-block">
             Login
