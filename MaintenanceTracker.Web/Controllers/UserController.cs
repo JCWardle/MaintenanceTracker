@@ -26,5 +26,15 @@ namespace MaintenanceTracker.Web.Controllers
             };
             return View(model);
         }
+
+        public ActionResult Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Index", new HomeViewModel { Register = model, Login = new LoginViewModel() });
+            }
+
+            return null;
+        }
     }
 }

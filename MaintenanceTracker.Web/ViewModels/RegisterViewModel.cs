@@ -8,11 +8,11 @@ namespace MaintenanceTracker.Web.ViewModels
 {
     public class RegisterViewModel
     {
-        [Required]
+        [Required, MinLength(3)]
         public string Username { get; set; }
-        [Required]
+        [Required, DataType(DataType.Password)]
         public string Password { get; set; }
-        [Required, Display(Name = "Confirm Password")]
+        [Required, DataType(DataType.Password), Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
         [EmailAddress]
         public string Email {get; set;}
