@@ -1,9 +1,7 @@
-﻿using MaintenanceTracker.Domain;
+﻿using AutoMapper;
+using MaintenanceTracker.Domain;
+using MaintenanceTracker.Domain.Model;
 using MaintenanceTracker.Web.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MaintenanceTracker.Web.Controllers
@@ -34,7 +32,9 @@ namespace MaintenanceTracker.Web.Controllers
                 return View("Index", new HomeViewModel { Register = model, Login = new LoginViewModel() });
             }
 
-            return null;
+            var user = Mapper.Map<User>(model);
+            _userStore.AddUser(user, model.Password);
+            return RedirectToAction("Index", "Home");
         }
     }
 }
