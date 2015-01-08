@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Web.Mvc;
 using MaintenanceTracker.Domain;
 using MaintenanceTracker.Domain.Model;
 using MaintenanceTracker.Web.Controllers;
@@ -24,9 +25,13 @@ namespace MaintenanceTracker.Tests.Web
                 Username = "abc"
             };
 
-            controller.Register(model);
+            var result = controller.Register(model);
 
             userStore.Verify(u => u.AddUser(It.IsAny<User>(), "abc"), Times.Once);
+            Assert.IsInstanceOf(typeof(RedirectToRouteResult), result);
+            var redirect = (RedirectToRouteResult) result;
+            Assert.AreEqual("Index", redirect.RouteValues["action"]);
+            Assert.AreEqual("Home", redirect.RouteValues["controller"]);
         }
     }
 }
