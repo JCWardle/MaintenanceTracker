@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using MaintenanceTracker.Domain;
 using MaintenanceTracker.Domain.Model;
 using MaintenanceTracker.Web.ViewModels;
@@ -17,23 +18,34 @@ namespace MaintenanceTracker.Web.Controllers
 
         public ActionResult Index()
         {
-            var model = new HomeViewModel
-            {
-                Login = new LoginViewModel(),
-                Register = new RegisterViewModel()
-            };
+            var model = new LoginViewModel();
             return View(model);
         }
 
+        public ActionResult Register()
+        {
+            return View(new RegisterViewModel());
+        }
+
+        [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View("Index", new HomeViewModel { Register = model, Login = new LoginViewModel() });
+                return View(model);
             }
 
             var user = Mapper.Map<User>(model);
-            _userStore.AddUser(user, model.Password);
+            try
+            {
+                _userStore.AddUser(user, model.Password);
+            }
+            catch (ArgumentException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(model);
+            }
+            
             return RedirectToAction("Index", "Home");
         }
     }

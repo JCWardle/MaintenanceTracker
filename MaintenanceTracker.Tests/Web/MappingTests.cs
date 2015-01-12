@@ -8,7 +8,7 @@ namespace MaintenanceTracker.Tests.Web
     public class MappingTests
     {
         [Test]
-        public void TestMapping()
+        public void Test_Mapping()
         {
             MapperConfig.Configure();
             Mapper.AssertConfigurationIsValid();
