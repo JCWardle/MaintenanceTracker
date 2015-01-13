@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace MaintenanceTracker
+namespace MaintenanceTracker.Web.App_Start
 {
     public class RouteConfig
     {
@@ -16,7 +16,7 @@ namespace MaintenanceTracker
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
