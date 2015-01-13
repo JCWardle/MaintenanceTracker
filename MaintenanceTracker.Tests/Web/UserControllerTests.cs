@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using AutoMapper;
 using MaintenanceTracker.Domain;
 using MaintenanceTracker.Domain.Model;
+using MaintenanceTracker.Web;
 using MaintenanceTracker.Web.App_Start;
 using MaintenanceTracker.Web.Controllers;
 using MaintenanceTracker.Web.ViewModels;
@@ -24,8 +25,9 @@ namespace MaintenanceTracker.Tests.Web
         public void Register_User()
         {
             var userStore = new Mock<IUserStore>();
+            var authService = new Mock<IFormsAuthenticationService>();
             userStore.Setup(u => u.AddUser(It.IsAny<User>(), "abc"));
-            var controller = new UserController(userStore.Object);
+            var controller = new UserController(userStore.Object, authService.Object);
             var model = new RegisterViewModel
             {
                 ConfirmPassword = "abc",
@@ -47,7 +49,8 @@ namespace MaintenanceTracker.Tests.Web
         public void Register_Shows_Register_Page()
         {
             var userStore = new Mock<IUserStore>();
-            var controller = new UserController(userStore.Object);
+            var authService = new Mock<IFormsAuthenticationService>();
+            var controller = new UserController(userStore.Object, authService.Object);
 
             var result = controller.Register();
 
@@ -65,8 +68,9 @@ namespace MaintenanceTracker.Tests.Web
         public void Cant_Register_Same_User_Twice()
         {
             var userStore = new Mock<IUserStore>();
+            var authService = new Mock<IFormsAuthenticationService>();
             userStore.Setup(u => u.AddUser(It.IsAny<User>(), "abc")).Throws(new ArgumentException("Username already taken"));
-            var controller = new UserController(userStore.Object);
+            var controller = new UserController(userStore.Object, authService.Object);
             var model = new RegisterViewModel
             {
                 ConfirmPassword = "abc",
@@ -86,6 +90,51 @@ namespace MaintenanceTracker.Tests.Web
             Assert.AreEqual("test@abc.com", view.Email);
         }
 
-        []
+        [Test]
+        public void Login_With_Valid_User()
+        {
+            var userStore = new Mock<IUserStore>();
+            var authService = new Mock<IFormsAuthenticationService>();
+            userStore.Setup(u => u.Authenticate("abc", "def")).Returns(true);
+            authService.Setup(a => a.SetAuthCookie("abc", false));
+            var controller = new UserController(userStore.Object, authService.Object);
+            var model = new LoginViewModel
+            {
+                Password = "def",
+                Username = "abc"
+            };
+
+            var result = controller.Index(model);
+
+            userStore.Verify(u => u.Authenticate("abc", "def"), Times.Once);
+            authService.Verify(a => a.SetAuthCookie("abc", false), Times.Once);
+            var redirect = (RedirectToRouteResult)result;
+            Assert.AreEqual("Index", redirect.RouteValues["action"]);
+            Assert.AreEqual("Home", redirect.RouteValues["controller"]);
+        }
+
+        [Test]
+        public void Login_With_Invalid_User()
+        {
+            var userStore = new Mock<IUserStore>();
+            var authService = new Mock<IFormsAuthenticationService>();
+            userStore.Setup(u => u.Authenticate("abc", "def")).Returns(false);
+            var controller = new UserController(userStore.Object, authService.Object);
+            var model = new LoginViewModel
+            {
+                Password = "def",
+                Username = "abc"
+            };
+
+            var result = controller.Index(model);
+
+            userStore.Verify(u => u.Authenticate("abc", "def"), Times.Once);
+            Assert.IsInstanceOf(typeof(ViewResult), result);
+            var view = (ViewResult)result;
+            Assert.IsInstanceOf(typeof(LoginViewModel), view.Model);
+            model = (LoginViewModel)view.Model;
+            Assert.AreEqual("abc", model.Username);
+            Assert.AreEqual("def", model.Password);
+        }
     }
 }
