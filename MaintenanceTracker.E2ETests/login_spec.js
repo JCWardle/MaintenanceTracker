@@ -3,6 +3,7 @@ describe("Maintenance Tracker Login Page", function()
     var username = element(by.id("Username"));
     var password = element(by.id("Password"));
     var login = element(by.css(".btn-success"));
+    var errormessage = element(by.css("span.field-validation-error"));
 
 	beforeEach(function() {
 	    browser.ignoreSynchronization = true;
@@ -45,5 +46,13 @@ describe("Maintenance Tracker Login Page", function()
         username.getAttribute("class").then(function (attr) {
             expect(attr).toContain("input-validation-error");
         });
+    });
+
+    it("should display a error message when given invalid credentials", function() {
+        username.sendKeys("abc");
+        password.sendKeys("abc");
+        login.click();
+
+        expect(errormessage.getText()).toBe("Invalid Username and Password");
     });
 });
