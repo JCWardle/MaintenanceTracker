@@ -7,3 +7,8 @@
 {
     width: 100%;    
 }
+
+.input-validation-error 
+{
+    border-color: red;    
+}

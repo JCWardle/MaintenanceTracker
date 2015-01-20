@@ -4,7 +4,6 @@ using MaintenanceTracker.Domain;
 using MaintenanceTracker.Domain.Model;
 using MaintenanceTracker.Web.ViewModels;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace MaintenanceTracker.Web.Controllers
 {

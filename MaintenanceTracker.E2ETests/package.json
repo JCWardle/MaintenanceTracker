@@ -1,0 +1,13 @@
+{ 
+  "name": "MaintenanceTrackerE2ETests", 
+  "version": "0.0.0", 
+  "description": "MaintenanceTrackerE2ETests", 
+  "main": "app.js", 
+  "author": { 
+    "name": "Jordan", 
+    "email": "" 
+  }, 
+  "devDependencies": { 
+    "protractor": "~0.17.0" 
+  } 
+} 
