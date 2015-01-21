@@ -50,7 +50,11 @@ namespace MaintenanceTracker.Web.Controllers
         public ActionResult Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.Password != model.ConfirmPassword)
             {
+                ModelState.AddModelError("Error", "Your passwords must match");
                 return View(model);
             }
 
@@ -61,7 +65,7 @@ namespace MaintenanceTracker.Web.Controllers
             }
             catch (ArgumentException e)
             {
-                ModelState.AddModelError(string.Empty, e.Message);
+                ModelState.AddModelError("Error", e.Message);
                 return View(model);
             }
             

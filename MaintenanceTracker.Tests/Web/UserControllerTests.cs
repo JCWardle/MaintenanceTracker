@@ -91,6 +91,29 @@ namespace MaintenanceTracker.Tests.Web
         }
 
         [Test]
+        public void Register_Passwords_Must_Match()
+        {
+            var userStore = new Mock<IUserStore>();
+            var authService = new Mock<IFormsAuthenticationService>();
+            var controller = new UserController(userStore.Object, authService.Object);
+
+            var model = new RegisterViewModel
+            {
+                ConfirmPassword = "def",
+                Password = "abc",
+                Username = "abc"
+            };
+
+            var result = controller.Register(model);
+
+            Assert.IsInstanceOf(typeof(ViewResult), result);
+            var view = (RegisterViewModel)((ViewResult)result).Model;
+            Assert.AreEqual("abc", view.Password);
+            Assert.AreEqual("def", view.ConfirmPassword);
+            Assert.AreEqual("abc", view.Username);
+        }
+
+        [Test]
         public void Login_With_Valid_User()
         {
             var userStore = new Mock<IUserStore>();
