@@ -106,7 +106,7 @@ namespace MaintenanceTracker.Tests.Domain
             context.Users.Add(new User{ 
                 Username = "test", Password = password, Salt = salt 
             });
-            encrpytor.Setup(e => e.GetPassword(salt, "test")).Returns(password);
+            encrpytor.Setup(e => e.GetPassword(salt, "test")).Returns(new byte[] { 1, 2, 3, 4 });
 
             var userStore = new UserStore(context, encrpytor.Object);
 
