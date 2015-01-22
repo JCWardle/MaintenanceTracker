@@ -37,8 +37,7 @@ namespace MaintenanceTracker.Domain
             
             if(user == null)
                 return false;
-            else
-                return user.Password == _encrpytor.GetPassword(user.Salt, password);
+            return user.Password.SequenceEqual(_encrpytor.GetPassword(user.Salt, password));
         }
 
         public void ChangePassword(string username, string password)
