@@ -90,7 +90,7 @@ namespace MaintenanceTracker.Tests.Domain
         {
             var context = new MockContext();
             var encrpytor = new Mock<IEncryptor>();
-            context.Users.Add(new User { Username = "test" });
+            context.Users.Add(new User { Username = "test", Password = new byte[] { 1, 2 }});
             var userStore = new UserStore(context, encrpytor.Object);
 
             Assert.IsFalse(userStore.Authenticate("test", "test"));
