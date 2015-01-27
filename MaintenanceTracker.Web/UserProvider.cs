@@ -1,10 +1,12 @@
-﻿namespace MaintenanceTracker.Web
+﻿using System.Web;
+
+namespace MaintenanceTracker.Web
 {
     public class UserProvider : IUserProvider
     {
         public string CurrentUserName()
         {
-            throw new System.NotImplementedException();
+            return HttpContext.Current.User.Identity.Name;
         }
     }
 }

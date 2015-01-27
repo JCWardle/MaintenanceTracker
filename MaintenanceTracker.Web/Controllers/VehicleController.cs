@@ -1,20 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using MaintenanceTracker.Domain;
+using MaintenanceTracker.Domain.Model;
 
 namespace MaintenanceTracker.Web.Controllers
 {
     [Authorize]
     public class VehicleController : ApiController
     {
-        public VehicleController(IMaintenanceTrackerContext context)
+        private IVehicleStore _store;
+        private IUserProvider _userProvider;
+
+        public VehicleController(IVehicleStore store, IUserProvider userProvider)
         {
-            
+            _store = store;
+            _userProvider = userProvider;
         }
 
-        public IEnumerable<string> Get()
+        public IEnumerable<Vehicle> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _store.ListVehicles(_userProvider.CurrentUserName());
         }
 
         public string Get(int id)

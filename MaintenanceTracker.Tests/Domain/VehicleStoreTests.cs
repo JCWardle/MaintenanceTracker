@@ -234,7 +234,7 @@ namespace MaintenanceTracker.Tests.Domain
             });
             var store = new VehicleStore(context);
 
-            var result = store.ListVehicles(_user.Id);
+            var result = store.ListVehicles(_user.Username);
 
             Assert.AreEqual(1, result.Count());
             var vehicle = result.First();
@@ -264,7 +264,7 @@ namespace MaintenanceTracker.Tests.Domain
             });
             var store = new VehicleStore(context);
 
-            var result = store.ListVehicles(_user.Id);
+            var result = store.ListVehicles(_user.Username);
 
             Assert.AreEqual(2, result.Count());
             var vehicle = result.First();
@@ -285,7 +285,7 @@ namespace MaintenanceTracker.Tests.Domain
             var context = new MockContext();
             var store = new VehicleStore(context);
 
-            var result = store.ListVehicles(_user.Id);
+            var result = store.ListVehicles(_user.Username);
 
             Assert.AreEqual(0, result.Count());
         }

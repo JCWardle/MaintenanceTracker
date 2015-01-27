@@ -1,0 +1,1 @@
+﻿var vehicleService = "/api/vehicle";

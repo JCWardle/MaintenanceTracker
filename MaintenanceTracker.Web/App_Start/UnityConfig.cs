@@ -41,6 +41,7 @@ namespace MaintenanceTracker.Web.App_Start
             container.RegisterType<IUserStore, UserStore>();
             container.RegisterType<IMaintenanceTrackerContext, MaintenanceTrackerContext>();
             container.RegisterType<IEncryptor, Encryptor>();
+            container.RegisterType<IUserProvider, UserProvider>();
             container.RegisterType<IFormsAuthenticationService, FormsAuthenticationService>();
         }
     }

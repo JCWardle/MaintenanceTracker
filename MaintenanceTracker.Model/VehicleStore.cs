@@ -59,9 +59,9 @@ namespace MaintenanceTracker.Domain
             _context.Vehicles.Remove(vehicle);
         }
 
-        public IEnumerable<Model.Vehicle> ListVehicles(int userId)
+        public IEnumerable<Model.Vehicle> ListVehicles(string username)
         {
-            return _context.Vehicles.Where(v => v.User.Id == userId);
+            return _context.Vehicles.Where(v => v.User.Username == username);
         }
 
         public void Dispose()
