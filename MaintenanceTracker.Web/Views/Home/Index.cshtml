@@ -1,7 +1,12 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/Angular/angular.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/vehicles.js"></script>
 }
 
-<h2>Index</h2>
+<div id="garage" ng-app="garage" ng-controller="vehiclesController">
+    <h1>Garage</h1>
+    <div id="vehicles">
 
+    </div>
+</div>
