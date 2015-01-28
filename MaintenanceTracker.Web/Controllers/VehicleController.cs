@@ -5,7 +5,6 @@ using MaintenanceTracker.Domain.Model;
 
 namespace MaintenanceTracker.Web.Controllers
 {
-    [Authorize]
     public class VehicleController : ApiController
     {
         private IVehicleStore _store;
@@ -17,11 +16,13 @@ namespace MaintenanceTracker.Web.Controllers
             _userProvider = userProvider;
         }
 
+        [HttpGet]
         public IEnumerable<Vehicle> Get()
         {
             return _store.ListVehicles(_userProvider.CurrentUserName());
         }
 
+        [HttpGet]
         public string Get(int id)
         {
             return "value";
