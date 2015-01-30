@@ -1,0 +1,60 @@
+﻿<div id="vehicle" np-app="vehicle" ng-controller="vehicleController">
+    <h1 class="row">New Vehicle</h1>
+    <div class="row">
+        <form class="col-md-6 col-md-offset-3">
+            <input type="hidden" ng-model="vehicle.id" />
+            <div class="form-group row">
+                <label for="Make" class="col-md-3">
+                    Make:
+                </label>
+                <div class="col-md-9">
+                    <ui-select theme="bootstrap"
+                               ng-model="vehicle.make">
+                        <ui-select-match placeholder="Select a make">{{$select.selected}}</ui-select-match>
+                        <ui-select-choices repeat="make in makes track by $index"
+                                           refresh="refreshMakes($select.search)"
+                                           refresh-delay="0">
+                            <div>
+                                <p>{{make}}</p>
+                            </div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Model" class="col-md-3">
+                    Make:
+                </label>
+                <div class="col-md-9">
+                    <select id="Model" name="Model" class="form-control" ng-model="vehicle.make"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Year" class="col-md-3">
+                    Year:
+                </label>
+                <div class="col-md-9">
+                    <input type="text" id="Year" class="col-md-9 form-control" ng-model="vehicle.year"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Kilometers" class="col-md-3">
+                    Kilometers:
+                </label>
+                <div class="col-md-9">
+                    <input type="number" id="Kilometers" class="col-md-9 form-control" ng-model="vehicle.kilometers"/>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-success btn-block" ng-click="update(vehicle)">
+                    Save
+                </button>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-block" ng-click="cancel()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

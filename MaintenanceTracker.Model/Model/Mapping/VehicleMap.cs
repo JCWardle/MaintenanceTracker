@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace MaintenanceTracker.Domain.Model.Mapping
 {
@@ -13,7 +8,13 @@ namespace MaintenanceTracker.Domain.Model.Mapping
         {
             HasKey(v => v.Id);
 
-            HasRequired(v => v.Model);
+            HasRequired(v => v.Model)
+                .WithRequiredDependent()
+                .WillCascadeOnDelete(false);
+
+            HasRequired(v => v.Make)
+                .WithRequiredDependent()
+                .WillCascadeOnDelete(false);
 
             HasMany(v => v.WorkItems)
                 .WithRequired(s => s.Vehicle)

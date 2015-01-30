@@ -17,7 +17,7 @@ namespace MaintenanceTracker.Tests.Domain
         private Vehicle _vehicle = new Vehicle
         {
             Id = 1,
-            Kilometres = 1000,
+            Kilometers = 1000,
             User = new User { Id = 1, Username = "test" }
         };
 
@@ -26,7 +26,7 @@ namespace MaintenanceTracker.Tests.Domain
 
         public MaintenanceStoreTests()
         {
-            var otherVehicle = new Vehicle { Id = 2, Kilometres = 2000, User = new User { Id = 2, Username = "test2" } };
+            var otherVehicle = new Vehicle { Id = 2, Kilometers = 2000, User = new User { Id = 2, Username = "test2" } };
             _schedules.Add(new Schedule { Id = 1, Title = "Oil", Vehicle = _vehicle });
             _schedules.Add(new Schedule { Id = 2, Title = "Spark Plug", Vehicle = _vehicle });
             _schedules.Add(new Schedule { Id = 3, Title = "Cable", Vehicle = _vehicle });

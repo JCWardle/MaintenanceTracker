@@ -32,8 +32,9 @@ namespace MaintenanceTracker.Web.Controllers
         {
         }
 
-        public void Put(int id, [FromBody]string value)
+        public void Put([FromBody]Vehicle value)
         {
+            _store.AddVehicle(_userProvider.CurrentUserName(), value);
         }
 
         public void Delete(int id)

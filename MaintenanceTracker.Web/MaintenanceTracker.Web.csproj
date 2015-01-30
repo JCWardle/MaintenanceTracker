@@ -932,7 +932,13 @@
     <Content Include="Scripts\JQuery\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr\modernizr-2.6.2.js" />
     <Content Include="Scripts\services.js" />
-    <Content Include="Scripts\vehicles.js" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\controllers.js" />
+    <Content Include="Scripts\templates\Vehicle.html" />
+    <Content Include="Scripts\ui-select\select.css" />
+    <Content Include="Scripts\ui-select\select.js" />
+    <Content Include="Scripts\ui-select\select.min.css" />
+    <Content Include="Scripts\ui-select\select.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -943,6 +949,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="ControllerFactory.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MakeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="FormsAuthenticationService.cs" />
@@ -968,6 +975,7 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\JQuery\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\templates\Vehicles.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

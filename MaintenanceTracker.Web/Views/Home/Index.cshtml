@@ -1,24 +1,14 @@
 ﻿@section Scripts
 {
     <script type="text/javascript" src="~/Scripts/Angular/angular.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/angular-route.js"></script>
     <script type="text/javascript" src="~/Scripts/services.js"></script>
-    <script type="text/javascript" src="~/Scripts/vehicles.js"></script>
+    <script type="text/javascript" src="~/Scripts/controllers.js"></script>
+    <script type="text/javascript" src="~/Scripts/app.js"></script>
+    <script type="text/javascript" src="~/Scripts/ui-select/select.min.js"></script>
 }
 
-<div id="garage" ng-app="garage" ng-controller="garageController">
-    <h1>Garage</h1>
-    <div id="vehicles">
-        <ul>
-            <li ng-repeat="v in vehicles">
-                <div class="vehicle btn btn-block">
-                    <h2>{{v.Year}}</h2>
-                </div>
-            </li>
-            <li>
-                <div class="btn btn-block success" ng-click="add()">
-                    <h2>Add</h2>
-                </div>
-            </li>
-        </ul>
-    </div>
+<div ng-app="garage">
+    <div ng-view></div>
 </div>
+
