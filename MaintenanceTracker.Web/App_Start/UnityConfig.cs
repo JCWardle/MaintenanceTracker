@@ -34,6 +34,7 @@ namespace MaintenanceTracker.Web.App_Start
 
             DependencyResolver.SetResolver(new Unity.Mvc5.UnityDependencyResolver(container));
             GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
+            container.RegisterType<IFormsAuthenticationService, FormsAuthenticationService>();
         }
     }
 }
