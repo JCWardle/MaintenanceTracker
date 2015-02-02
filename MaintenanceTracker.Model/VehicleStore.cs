@@ -14,7 +14,7 @@ namespace MaintenanceTracker.Domain
             _context = context;
         }
 
-        public void AddVehicle(string username, Model.Vehicle vehicle)
+        public void AddVehicle(string username, Vehicle vehicle)
         {
             var user = _context.Users.FirstOrDefault(u => u.Username == username);
 
