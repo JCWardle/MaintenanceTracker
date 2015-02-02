@@ -950,6 +950,7 @@
     <Compile Include="ControllerFactory.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MakeController.cs" />
+    <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="FormsAuthenticationService.cs" />

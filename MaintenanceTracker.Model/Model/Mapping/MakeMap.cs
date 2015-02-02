@@ -16,7 +16,7 @@ namespace MaintenanceTracker.Domain.Model.Mapping
 
             HasMany(m => m.Models)
                 .WithRequired(m => m.Make)
-                .Map(m => m.MapKey("ModelId"));            
+                .Map(m => m.MapKey("MakeId"));
         }
     }
 }

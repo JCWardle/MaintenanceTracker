@@ -8,6 +8,7 @@ namespace MaintenanceTracker.Web.App_Start
         public static void RegisterRoutes(HttpConfiguration config)
         {
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

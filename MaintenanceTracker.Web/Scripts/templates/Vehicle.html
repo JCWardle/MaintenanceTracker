@@ -8,25 +8,33 @@
                     Make:
                 </label>
                 <div class="col-md-9">
-                    <ui-select theme="bootstrap"
-                               ng-model="vehicle.make">
-                        <ui-select-match placeholder="Select a make">{{$select.selected}}</ui-select-match>
-                        <ui-select-choices repeat="make in makes track by $index"
-                                           refresh="refreshMakes($select.search)"
-                                           refresh-delay="0">
+                    <ui-select ng-model="vehicle.make" on-select="makeSelect($item, $model)">
+                        <ui-select-match placeholder="Select a make">
+                            {{$select.selected.Name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item.id as item in makes | filter: $select.search">
                             <div>
-                                <p>{{make}}</p>
+                                <p>{{item.Name}}</p>
                             </div>
-                        </ui-select-choices>
+                        </ui-select-choices>                        
                     </ui-select>
-                </div>
+                </div>  
             </div>
             <div class="form-group row">
                 <label for="Model" class="col-md-3">
-                    Make:
+                    Model:
                 </label>
                 <div class="col-md-9">
-                    <select id="Model" name="Model" class="form-control" ng-model="vehicle.make"></select>
+                    <ui-select ng-model="vehicle.model" ng-disable="{{$scope.modelSelectActive}}">
+                        <ui-select-match placeholder="Select a model">
+                            {{$select.selected.Name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item.id as item in models | filter: $select.search">
+                            <div>
+                                <p>{{item.Name}}</p>
+                            </div>
+                        </ui-select-choices>
+                    </ui-select>
                 </div>
             </div>
             <div class="form-group row">
@@ -34,7 +42,16 @@
                     Year:
                 </label>
                 <div class="col-md-9">
-                    <input type="text" id="Year" class="col-md-9 form-control" ng-model="vehicle.year"/>
+                    <ui-select ng-model="vehicle.year">
+                        <ui-select-match placeholder="Select a year">
+                            {{$select.selected}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="n in [] | range:1900:2015">
+                            <div>
+                                <p>{{n}}</p>
+                            </div>
+                        </ui-select-choices>
+                    </ui-select>
                 </div>
             </div>
             <div class="form-group row">
