@@ -17,11 +17,20 @@ garageControllers.controller("vehicleController", [
                 $scope.makes = data;
             });
 
-        $scope.makeSelect = function (item, model) {
+        $scope.modelSelect = function(model) {
+            $scope.model = model;
+        };
+
+        $scope.yearSelect = function (year) {
+            $scope.vehicle.Year = year;
+        };
+
+        $scope.makeSelect = function (make) {
             $scope.modelSelectActive = true;
+            $scope.make = make;
             $scope.models = [];
-            $scope.vehicle.model = null;
-            $http.get(modelService + "?make=" + item.Name)
+            $scope.model = {};
+            $http.get(modelService + "?make=" + make.Name)
             .success(function(data) {
                 for (var i = 0; i < data.length; i++) {
                     $scope.models.push(data[i]);

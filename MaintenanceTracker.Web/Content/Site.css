@@ -12,3 +12,15 @@
 {
     border-color: red;    
 }
+
+a 
+{
+    cursor: pointer;
+}
+
+.scrollable-menu 
+{
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}

@@ -8,33 +8,43 @@
                     Make:
                 </label>
                 <div class="col-md-9">
-                    <ui-select ng-model="vehicle.make.Name" on-select="makeSelect($item, $model)">
-                        <ui-select-match placeholder="Select a make">
-                            {{$select.selected.Name}}
-                        </ui-select-match>
-                        <ui-select-choices repeat="item.id as item in makes | filter: $select.search">
-                            <div>
-                                <p>{{item.Name}}</p>
-                            </div>
-                        </ui-select-choices>                        
-                    </ui-select>
-                </div>  
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="make.Name"/>
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <li ng-repeat="make in makes | filter:make.Name" class="input-lg">
+                                    <a ng-click="makeSelect(make)">
+                                        {{make.Name}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="form-group row">
                 <label for="Model" class="col-md-3">
                     Model:
                 </label>
                 <div class="col-md-9">
-                    <ui-select ng-model="vehicle.model.Name" ng-disable="{{$scope.modelSelectActive}}">
-                        <ui-select-match placeholder="Select a model">
-                            {{$select.selected.Name}}
-                        </ui-select-match>
-                        <ui-select-choices repeat="item.id as item in models | filter: $select.search">
-                            <div>
-                                <p>{{item.Name}}</p>
-                            </div>
-                        </ui-select-choices>
-                    </ui-select>
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="model.Name" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <li ng-repeat="model in models | filter:model.Name" class="input-lg">
+                                    <a ng-click="modelSelect(model)">
+                                        {{model.Name}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group row">
@@ -42,16 +52,21 @@
                     Year:
                 </label>
                 <div class="col-md-9">
-                    <ui-select ng-model="vehicle.Year">
-                        <ui-select-match placeholder="Select a year">
-                            {{$select.selected}}
-                        </ui-select-match>
-                        <ui-select-choices repeat="n in [] | range:1900:2015">
-                            <div>
-                                <p>{{n}}</p>
-                            </div>
-                        </ui-select-choices>
-                    </ui-select>
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="vehicle.Year" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <li ng-repeat="n in [] | range:1900:2016 | filter:vehicle.year" class="input-lg">
+                                    <a ng-click="yearSelect(n)">
+                                        {{n}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group row">
