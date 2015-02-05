@@ -4,7 +4,6 @@ using MaintenanceTracker.Domain;
 using MaintenanceTracker.Domain.Model;
 using MaintenanceTracker.Web.ViewModels;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace MaintenanceTracker.Web.Controllers
 {
@@ -28,12 +27,16 @@ namespace MaintenanceTracker.Web.Controllers
         [HttpPost]
         public ActionResult Index(LoginViewModel model)
         {
-            if (ModelState.IsValid && _userStore.Authenticate(model.Username, model.Password))
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (_userStore.Authenticate(model.Username, model.Password))
             {
                 _authenticationService.SetAuthCookie(model.Username, model.RememberMe);
                 return RedirectToAction("Index", "Home");
             }
 
+            ModelState.AddModelError("WrongUsernamePassword", "Invalid Username and Password");
             
             return View(model);
         }
@@ -47,7 +50,11 @@ namespace MaintenanceTracker.Web.Controllers
         public ActionResult Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.Password != model.ConfirmPassword)
             {
+                ModelState.AddModelError("Error", "Your passwords must match");
                 return View(model);
             }
 
@@ -58,7 +65,7 @@ namespace MaintenanceTracker.Web.Controllers
             }
             catch (ArgumentException e)
             {
-                ModelState.AddModelError(string.Empty, e.Message);
+                ModelState.AddModelError("Error", e.Message);
                 return View(model);
             }
             

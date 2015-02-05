@@ -1,0 +1,17 @@
+﻿<div id="garage" ng-app="garage" ng-controller="vehiclesController">
+    <h1>Garage</h1>
+    <div id="vehicles">
+        <ul>
+            <li ng-repeat="v in vehicles">
+                <div class="vehicle btn btn-block">
+                    <h2>{{v.Year}}</h2>
+                </div>
+            </li>
+            <li>
+                <div class="btn btn-block success" ng-click="add()">
+                    <h2>Add</h2>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -7,3 +7,20 @@
 {
     width: 100%;    
 }
+
+.input-validation-error 
+{
+    border-color: red;    
+}
+
+a 
+{
+    cursor: pointer;
+}
+
+.scrollable-menu 
+{
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}

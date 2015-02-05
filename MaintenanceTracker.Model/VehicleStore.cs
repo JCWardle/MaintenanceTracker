@@ -1,8 +1,7 @@
-﻿using System;
+﻿using MaintenanceTracker.Domain.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MaintenanceTracker.Domain
 {
@@ -15,9 +14,9 @@ namespace MaintenanceTracker.Domain
             _context = context;
         }
 
-        public void AddVehicle(int userId, Model.Vehicle vehicle)
+        public void AddVehicle(string username, Vehicle vehicle)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
 
             if (user == null)
                 throw new ArgumentException("Invalid User");
@@ -37,7 +36,7 @@ namespace MaintenanceTracker.Domain
             _context.SaveChanges();
         }
 
-        public void AddMake(Model.Make make)
+        public void AddMake(Make make)
         {
             if (_context.Makes.Any(m => m.Name == make.Name))
                 throw new ArgumentException("Make already exists");
@@ -59,9 +58,19 @@ namespace MaintenanceTracker.Domain
             _context.Vehicles.Remove(vehicle);
         }
 
-        public IEnumerable<Model.Vehicle> ListVehicles(int userId)
+        public IEnumerable<Vehicle> ListVehicles(string username)
         {
-            return _context.Vehicles.Where(v => v.User.Id == userId);
+            return _context.Vehicles.Where(v => v.User.Username == username);
+        }
+
+        public IEnumerable<Model.Model> ListModels()
+        {
+            return _context.Models;
+        }
+
+        public IEnumerable<Make> ListMakes()
+        {
+            return _context.Makes;
         }
 
         public void Dispose()

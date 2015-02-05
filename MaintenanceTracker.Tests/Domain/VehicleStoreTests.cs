@@ -45,15 +45,15 @@ namespace MaintenanceTracker.Tests.Domain
             var store = new VehicleStore(context);
             var vehicle = new Vehicle
             {
-                Kilometres = 7000,
+                Kilometers = 7000,
                 Model = context.Models.First(),
                 Year = "1991"
             };
 
-            store.AddVehicle(1, vehicle);
+            store.AddVehicle(_user.Username, vehicle);
 
             vehicle = context.Vehicles.First();
-            Assert.AreEqual(7000, vehicle.Kilometres);
+            Assert.AreEqual(7000, vehicle.Kilometers);
             Assert.AreEqual(context.Models.First(), vehicle.Model);
             Assert.AreEqual("1991", vehicle.Year);
             Assert.AreEqual(1, context.SaveChangesCalls);
@@ -68,12 +68,12 @@ namespace MaintenanceTracker.Tests.Domain
             var store = new VehicleStore(context);
             var vehicle = new Vehicle
             {
-                Kilometres = 7000,
+                Kilometers = 7000,
                 Model = context.Models.First(),
                 Year = "1991"
             };
             
-            store.AddVehicle(2, vehicle);
+            store.AddVehicle("abc", vehicle);
         }
 
         [Test]
@@ -228,17 +228,17 @@ namespace MaintenanceTracker.Tests.Domain
             context.Vehicles.Add(new Vehicle
             {
                 Id = 1,
-                Kilometres = 1337,
+                Kilometers = 1337,
                 Model = _model,
                 User = _user
             });
             var store = new VehicleStore(context);
 
-            var result = store.ListVehicles(_user.Id);
+            var result = store.ListVehicles(_user.Username);
 
             Assert.AreEqual(1, result.Count());
             var vehicle = result.First();
-            Assert.AreEqual(1337, vehicle.Kilometres);
+            Assert.AreEqual(1337, vehicle.Kilometers);
             Assert.AreEqual(1, vehicle.Id);
             Assert.AreEqual(_user, vehicle.User);
             Assert.AreEqual(_model, vehicle.Model);
@@ -251,29 +251,29 @@ namespace MaintenanceTracker.Tests.Domain
             context.Vehicles.Add(new Vehicle
             {
                 Id = 1,
-                Kilometres = 1337,
+                Kilometers = 1337,
                 Model = _model,
                 User = _user
             });
             context.Vehicles.Add(new Vehicle
             {
                 Id = 2,
-                Kilometres = 1338,
+                Kilometers = 1338,
                 Model = _model,
                 User = _user
             });
             var store = new VehicleStore(context);
 
-            var result = store.ListVehicles(_user.Id);
+            var result = store.ListVehicles(_user.Username);
 
             Assert.AreEqual(2, result.Count());
             var vehicle = result.First();
-            Assert.AreEqual(1337, vehicle.Kilometres);
+            Assert.AreEqual(1337, vehicle.Kilometers);
             Assert.AreEqual(1, vehicle.Id);
             Assert.AreEqual(_user, vehicle.User);
             Assert.AreEqual(_model, vehicle.Model);
             vehicle = result.Last();
-            Assert.AreEqual(1338, vehicle.Kilometres);
+            Assert.AreEqual(1338, vehicle.Kilometers);
             Assert.AreEqual(2, vehicle.Id);
             Assert.AreEqual(_user, vehicle.User);
             Assert.AreEqual(_model, vehicle.Model);
@@ -285,7 +285,7 @@ namespace MaintenanceTracker.Tests.Domain
             var context = new MockContext();
             var store = new VehicleStore(context);
 
-            var result = store.ListVehicles(_user.Id);
+            var result = store.ListVehicles(_user.Username);
 
             Assert.AreEqual(0, result.Count());
         }

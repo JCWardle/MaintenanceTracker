@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace MaintenanceTracker.Domain.Model.Mapping
 {
@@ -21,7 +16,7 @@ namespace MaintenanceTracker.Domain.Model.Mapping
 
             HasMany(m => m.Models)
                 .WithRequired(m => m.Make)
-                .Map(m => m.MapKey("ModelId"));            
+                .Map(m => m.MapKey("MakeId"));
         }
     }
 }

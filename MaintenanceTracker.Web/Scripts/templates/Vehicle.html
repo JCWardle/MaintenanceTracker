@@ -1,0 +1,92 @@
+﻿<div id="vehicle" np-app="vehicle" ng-controller="vehicleController">
+    <h1 class="row">New Vehicle</h1>
+    <div class="row">
+        <form class="col-md-6 col-md-offset-3">
+            <input type="hidden" ng-model="vehicle.id" />
+            <div class="form-group row">
+                <label for="Make" class="col-md-3">
+                    Make:
+                </label>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="make.Name"/>
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <li ng-repeat="make in makes | filter:make.Name" class="input-lg">
+                                    <a ng-click="makeSelect(make)">
+                                        {{make.Name}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Model" class="col-md-3">
+                    Model:
+                </label>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="model.Name" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <li ng-repeat="model in models | filter:model.Name" class="input-lg">
+                                    <a ng-click="modelSelect(model)">
+                                        {{model.Name}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Year" class="col-md-3">
+                    Year:
+                </label>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="vehicle.Year" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <li ng-repeat="n in [] | range:1900:2016 | filter:vehicle.year" class="input-lg">
+                                    <a ng-click="yearSelect(n)">
+                                        {{n}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Kilometers" class="col-md-3">
+                    Kilometers:
+                </label>
+                <div class="col-md-9">
+                    <input type="number" id="Kilometers" class="col-md-9 form-control" ng-model="vehicle.Kilometers"/>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-success btn-block" ng-click="update(vehicle)">
+                    Save
+                </button>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-block" ng-click="cancel()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace MaintenanceTracker.Domain.Model.Mapping
 {
@@ -17,7 +12,8 @@ namespace MaintenanceTracker.Domain.Model.Mapping
                 .HasMaxLength(50)
                 .IsRequired();
 
-            HasRequired(m => m.Make);
+            HasRequired(m => m.Make)
+                .WithMany(m => m.Models);
 
             ToTable("Model");
         }
