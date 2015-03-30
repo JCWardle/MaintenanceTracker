@@ -3,6 +3,7 @@ using NUnit.Framework;
 ﻿using System.Linq;
 using System.Collections.Generic;
 using MaintenanceTracker.Domain.Model;
+using MaintenanceTracker.Tests.Domain.Context;
 
 namespace MaintenanceTracker.Tests.Web
 {
@@ -13,7 +14,7 @@ namespace MaintenanceTracker.Tests.Web
 
         public VehicleControllerTests()
         {
-            _context = new MaintenanceTrackerContext();
+            _context = new MockContext();
             _context.Users.Add(new User
             {
                 Id = 1,
@@ -61,6 +62,7 @@ namespace MaintenanceTracker.Tests.Web
                 User = user
             });
 
+            user.Vehicles = new List<Vehicle>();
             user.Vehicles.Add(_context.Vehicles.First());
             user.Vehicles.Add(_context.Vehicles.Last());
         }
