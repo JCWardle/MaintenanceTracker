@@ -1,23 +1,23 @@
 ﻿var garageControllers = angular.module("garageControllers", []);
 
 garageControllers.controller("vehicleController", [
-    "$scope", "$http", "$routeParams", function($scope, $http, $routeParams) {
+    "$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
         $scope.vehicle = {
             id: $routeParams.vehicleId
         };
         $scope.modelSelectActive = false;
         $scope.models = [];
 
-        $scope.update = function(vehicle) {
+        $scope.update = function (vehicle) {
             $http.put(vehicleService, vehicle);
         }
 
         $http.get(makeService)
-            .success(function(data) {
+            .success(function (data) {
                 $scope.makes = data;
             });
 
-        $scope.modelSelect = function(model) {
+        $scope.modelSelect = function (model) {
             $scope.model = model;
         };
 
@@ -31,14 +31,14 @@ garageControllers.controller("vehicleController", [
             $scope.models = [];
             $scope.model = {};
             $http.get(modelService + "?make=" + make.Name)
-            .success(function(data) {
+            .success(function (data) {
                 for (var i = 0; i < data.length; i++) {
                     $scope.models.push(data[i]);
                 }
             });
         };
     }
-]);
+])
 
 garageControllers.controller("vehiclesController", [
     "$scope", "$http", "$location", function($scope, $http, $location) {

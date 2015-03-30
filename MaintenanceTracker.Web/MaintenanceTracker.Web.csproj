@@ -928,6 +928,7 @@
     <Content Include="Scripts\Angular\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\Angular\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\Angular\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\autoCompleteSelector.js" />
     <Content Include="Scripts\BootStrap\bootstrap.js" />
     <Content Include="Scripts\BootStrap\bootstrap.min.js" />
     <Content Include="Scripts\checkbox-x\checkbox-x.min.js" />
@@ -938,12 +939,8 @@
     <Content Include="Scripts\services.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\controllers.js" />
+    <Content Include="Scripts\templates\AutoCompleteSelector.html" />
     <Content Include="Scripts\templates\Vehicle.html" />
-    <Content Include="Scripts\ui-select\select.css" />
-    <Content Include="Scripts\ui-select\select.js" />
-    <Content Include="Scripts\ui-select\select.min.css" />
-    <Content Include="Scripts\ui-select\select.min.js" />
-    <Content Include="Scripts\vehicles.js" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Web.config" />
   </ItemGroup>

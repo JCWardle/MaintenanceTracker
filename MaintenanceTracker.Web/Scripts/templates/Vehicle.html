@@ -8,21 +8,7 @@
                     Make:
                 </label>
                 <div class="col-md-9">
-                    <div class="input-group">
-                        <input type="text" class="form-control" ng-model="make.Name"/>
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu scrollable-menu" role="menu">
-                                <li ng-repeat="make in makes | filter:make.Name" class="input-lg">
-                                    <a ng-click="makeSelect(make)">
-                                        {{make.Name}}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <auto-complete-selector binding="{{vehicle.Make}}" />
                 </div>
             </div>
             <div class="form-group row">
@@ -30,21 +16,7 @@
                     Model:
                 </label>
                 <div class="col-md-9">
-                    <div class="input-group">
-                        <input type="text" class="form-control" ng-model="model.Name" />
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu scrollable-menu" role="menu">
-                                <li ng-repeat="model in models | filter:model.Name" class="input-lg">
-                                    <a ng-click="modelSelect(model)">
-                                        {{model.Name}}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <auto-complete-selector binding="{{vehicle.Model}}"/>
                 </div>
             </div>
             <div class="form-group row">

@@ -1,4 +1,4 @@
-﻿var app = angular.module("garage", ["ngRoute", "garageControllers", 'ui.select', 'ngSanitize']);
+﻿var app = angular.module("garage", ["ngRoute", "garageControllers", 'ngSanitize']);
 
 app.config([
     "$routeProvider",
@@ -18,10 +18,6 @@ app.config([
     }
 ]);
 
-app.config(function (uiSelectConfig) {
-    uiSelectConfig.theme = 'bootstrap';
-});
-
 app.filter('range', function () {
     return function (input, min, max) {
         min = parseInt(min);
@@ -29,5 +25,18 @@ app.filter('range', function () {
         for (var i = min; i < max; i++)
             input.push(i);
         return input;
+    };
+});
+
+app.directive("autoCompleteSelector", function () {
+    function link(scope, element, attrs) {
+        scope.value = attrs.binding;
+    };
+
+    return {
+        restrict: 'AE',
+        templateUrl: "scripts/templates/AutoCompleteSelector.html",
+        scope: true,
+        link: link
     };
 });
