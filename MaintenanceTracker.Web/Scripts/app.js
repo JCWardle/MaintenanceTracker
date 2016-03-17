@@ -28,9 +28,23 @@ app.filter('range', function () {
     };
 });
 
-app.directive("autoCompleteSelector", function () {
+app.directive("autoCompleteSelector", ["$http", function ($http) {
     function link(scope, element, attrs) {
         scope.value = attrs.binding;
+        
+        if (attrs.characterCount)
+            scope.characterCount = attrs.searchCount;
+        else
+            scope.characterCount = 3;
+
+        scope.url = attrs.url;
+
+        scope.options = $http.get(scope.url).success(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                scope.options.push(data[i]);
+            }
+            alert(scope.options[0]);
+        });
     };
 
     return {
@@ -39,4 +53,4 @@ app.directive("autoCompleteSelector", function () {
         scope: true,
         link: link
     };
-});
+}]);

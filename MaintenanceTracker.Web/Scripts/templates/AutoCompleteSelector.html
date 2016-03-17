@@ -1,15 +1,10 @@
 ﻿<div class="input-group">
     <input type="text" class="form-control" ng-model="value"/>
-    <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu scrollable-menu" role="menu">
-            <li ng-repeat="n in [] | range:10:20" class="input-lg">
-                <a n>
-                    {{n}}
-                </a>
-            </li>
-        </ul>
-    </div>
+    <ul class="scrollable-menu" role="menu" ng-show="value.length >= 3">
+        <li ng-repeat="o in options" class="input-lg">
+            <a>
+                {{o.Name}}
+            </a>
+        </li>
+    </ul>
 </div>
